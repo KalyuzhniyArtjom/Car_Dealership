@@ -1,0 +1,37 @@
+﻿@page
+@model Car_Dealership.Pages.Cars.IndexModel
+@{
+}
+<h1>Список книг</h1>
+
+<p>
+    <a asp-page="Create">Добавить новую книгу</a>
+</p>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Страна производитель</th>
+            <th>Год</th>
+            <th>Количество</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Car)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Сountry</td>
+                <td>@book.Year</td>
+                <td>@book.Quantity</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@book.Id">Открыть</a>
+                    <a asp-page="Edit" asp-route-id="@book.Id">Изменить</a>
+                    <a asp-page="Delete" asp-route-id="@book.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

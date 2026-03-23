@@ -1,0 +1,41 @@
+﻿@page
+@model Car_Dealership.Pages.Clients.DeleteModel
+@{
+}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+
+        <div class="card border-danger shadow-sm mt-4">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">Подтверждение удаления</h5>
+            </div>
+
+            <div class="card-body">
+                <p class="mb-3">
+                    Вы действительно хотите удалить клиета:
+                </p>
+
+                <div class="alert alert-light border">
+                    <strong>@Model.Client.FullName</strong><br />
+                    <small class="text-muted">@Model.Client.PhoneNumber</small>
+                </div>
+
+                <form method="post">
+                    <input type="hidden" asp-for="Client.Id" />
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-page="Index" class="btn btn-outline-secondary">
+                            Отмена
+                        </a>
+
+                        <button type="submit" class="btn btn-danger">
+                            Удалить
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
