@@ -32,23 +32,23 @@
                             {
                                 <tr>
                                     <td class="fw-semibold">
-                                        @client.LastName
+                                        @client.FullName
                                     </td>
 
                                     <td>
                                         <span class="text-muted">
-                                            @client.Email
+                                            @client.VisitDate
                                         </span>
                                     </td>
 
                                     <td>
-                                        @(string.IsNullOrEmpty(client.Phone)
+                                        @(string.IsNullOrEmpty(client.PhoneNumber)
                                                                             ? "—"
-                                                                            : client.Phone)
+                                                                            : client.PhoneNumber)
                                 </td>
 
                                     <td>
-                                        @client.BirthDate.ToShortDateString()
+                                        @client.BirthDate.ToString()
                                     </td>
 
                                     <td class="text-end">

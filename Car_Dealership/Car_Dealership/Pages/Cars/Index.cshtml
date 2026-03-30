@@ -2,34 +2,34 @@
 @model Car_Dealership.Pages.Cars.IndexModel
 @{
 }
-<h1>Список книг</h1>
+<h1>Список авто</h1>
 
 <p>
-    <a asp-page="Create">Добавить новую книгу</a>
+    <a asp-page="Create">Добавить новый автомобиль</a>
 </p>
 
 <table border="1" cellpadding="5">
     <thead>
         <tr>
             <th>Название</th>
-            <th>Страна производитель</th>
-            <th>Год</th>
-            <th>Количество</th>
+            <th>Страна</th>
+            <th>Год выпуска</th>
+            <th>Цена</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var book in Model.Car)
+        @foreach (var car in Model.Cars)
         {
             <tr>
-                <td>@book.Title</td>
-                <td>@book.Сountry</td>
-                <td>@book.Year</td>
-                <td>@book.Quantity</td>
+                <td>@car.Title</td>
+                <td>@car.Сountry</td>
+                <td>@car.YearOfManufacture</td>
+                <td>@car.Price</td>
                 <td>
-                    <a asp-page="Details" asp-route-id="@book.Id">Открыть</a>
-                    <a asp-page="Edit" asp-route-id="@book.Id">Изменить</a>
-                    <a asp-page="Delete" asp-route-id="@book.Id">Удалить</a>
+                    <a asp-page="Details" asp-route-id="@car.Id">Открыть</a>
+                    <a asp-page="Edit" asp-route-id="@car.Id">Изменить</a>
+                    <a asp-page="Delete" asp-route-id="@car.Id">Удалить</a>
                 </td>
             </tr>
         }

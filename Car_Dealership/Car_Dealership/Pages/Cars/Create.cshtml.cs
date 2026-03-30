@@ -1,3 +1,5 @@
+using Car_Dealership.Data;
+using Car_Dealership.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -5,8 +7,27 @@ namespace Car_Dealership.Pages.Cars
 {
     public class CreateModel : PageModel
     {
-        public void OnGet()
+        private readonly ApplicationDbContext _context;
+
+        public CreateModel(ApplicationDbContext context)
         {
+            _context = context;
+        }
+
+        [BindProperty]
+        public Car Car { get; set; }
+
+        public void OnGet() { }
+
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+                return Page();
+
+            _context.Cars.Add(Car);
+            _context.SaveChanges();
+
+            return RedirectToPage("Index");
         }
     }
 }

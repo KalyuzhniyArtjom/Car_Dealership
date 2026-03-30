@@ -8,7 +8,7 @@
     <div>
         <label>Название</label><br />
         <input asp-for="Car.Title" />
-        <span asp-validation-for="Car.Title"></span>
+        <span asp-validation-for="Car.Brand"></span>
     </div>
 
     <div>
@@ -17,13 +17,13 @@
     </div>
 
     <div>
-        <label>Год</label><br />
-        <input asp-for="Car.Year" type="number" />
+        <label>Цена</label><br />
+        <input asp-for="Car.Price" type="number" />
     </div>
 
     <div>
-        <label>Количество</label><br />
-        <input asp-for="Car.Quantity" type="number" />
+        <label>Дата выпуска</label><br />
+        <input asp-for="Car.YearOfManufacture" type="number" />
     </div>
 
     <button type="submit">Сохранить</button>
