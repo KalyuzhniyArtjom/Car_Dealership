@@ -5,7 +5,7 @@
         public string? FullName { get; set; }
         public DateTime VisitDate { get; set; }
         public string? PhoneNumber { get; set; }
-        public int BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         
     }
 }

@@ -12,9 +12,9 @@
     <thead>
         <tr>
             <th>Название</th>
-            <th>Страна</th>
-            <th>Год выпуска</th>
+            <th>Страна производитель</th>
             <th>Цена</th>
+            <th>Год выпуска</th>
             <th></th>
         </tr>
     </thead>
@@ -24,8 +24,8 @@
             <tr>
                 <td>@car.Title</td>
                 <td>@car.Сountry</td>
-                <td>@car.YearOfManufacture</td>
                 <td>@car.Price</td>
+                <td>@car.YearOfManufacture</td>
                 <td>
                     <a asp-page="Details" asp-route-id="@car.Id">Открыть</a>
                     <a asp-page="Edit" asp-route-id="@car.Id">Изменить</a>
