@@ -19,6 +19,8 @@ namespace Car_Dealership.Pages.Cars
 
         public void OnGet() { }
 
+
+
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
