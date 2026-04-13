@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Car_Dealership.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260216060725_Init")]
-    partial class Init
+    [Migration("20260413054356_Ficks")]
+    partial class Ficks
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,22 @@ namespace Car_Dealership.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Car_Dealership.Model.BrandCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BrandCar");
+                });
+
             modelBuilder.Entity("Car_Dealership.Model.Car", b =>
                 {
                     b.Property<int>("Id")
@@ -33,19 +49,27 @@ namespace Car_Dealership.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Manufacturer")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("YearOfManufacture")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("YearOfManufacture")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Сountry")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Cars");
                 });
@@ -58,6 +82,9 @@ namespace Car_Dealership.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
@@ -67,15 +94,28 @@ namespace Car_Dealership.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TableNumber")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("VisitDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("Car_Dealership.Model.Car", b =>
+                {
+                    b.HasOne("Car_Dealership.Model.BrandCar", "Brand")
+                        .WithMany("Car")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+                });
+
+            modelBuilder.Entity("Car_Dealership.Model.BrandCar", b =>
+                {
+                    b.Navigation("Car");
                 });
 #pragma warning restore 612, 618
         }
