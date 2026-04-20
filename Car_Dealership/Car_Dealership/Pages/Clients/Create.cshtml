@@ -2,52 +2,69 @@
 @model Car_Dealership.Pages.Clients.CreateModel
 @{
 }
-<h1 class="mb-4">Добавить клиента</h1>
-
-<div class="row">
-    <div class="col-md-6">
-        <form method="post">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label asp-for="Client.FullName" class="form-label"></label>
-                        <input asp-for="Client.FullName" class="form-control" />
-                        <span asp-validation-for="Client.FullName" class="text-danger"></span>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h1 class="h3 mb-0">➕ Добавить клиента</h1>
                     </div>
 
-                    <div class="mb-3">
-                        <label asp-for="Client.VisitDate" class="form-label"></label>
-                        <input asp-for="Client.VisitDate" class="form-control" />
-                        <span asp-validation-for="Client.VisitDate" class="text-danger"></span>
-                    </div>
+                    <div class="card-body p-4">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label asp-for="Client.FullName" class="form-label fw-bold text-secondary"></label>
+                                <input asp-for="Client.FullName" class="form-control form-control-lg" placeholder="Введите ФИО клиента" />
+                                <span asp-validation-for="Client.FullName" class="text-danger small"></span>
+                            </div>
 
-                    <div class="mb-3">
-                        <label asp-for="Client.PhoneNumber" class="form-label"></label>
-                        <input asp-for="Client.PhoneNumber" class="form-control" />
-                        <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
-                    </div>
+                            <div class="mb-3">
+                                <label asp-for="Client.VisitDate" class="form-label fw-bold text-secondary"></label>
+                                <input asp-for="Client.VisitDate" class="form-control form-control-lg" placeholder="Дата визита" />
+                                <span asp-validation-for="Client.VisitDate" class="text-danger small"></span>
+                            </div>
 
-                    <div class="mb-3">
-                        <label asp-for="Client.BirthDate" class="form-label"></label>
-                        <input asp-for="Client.BirthDate" type="date" class="form-control" />
-                        <span asp-validation-for="Client.BirthDate" class="text-danger"></span>
-                    </div>
+                            <div class="mb-3">
+                                <label asp-for="Client.PhoneNumber" class="form-label fw-bold text-secondary"></label>
+                                <input asp-for="Client.PhoneNumber" class="form-control form-control-lg" placeholder="+7 (999) 123-45-67" />
+                                <span asp-validation-for="Client.PhoneNumber" class="text-danger small"></span>
+                            </div>
 
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">
-                            Сохранить
-                        </button>
+                            <div class="mb-4">
+                                <label asp-for="Client.BirthDate" class="form-label fw-bold text-secondary"></label>
+                                <input asp-for="Client.BirthDate" type="date" class="form-control form-control-lg" />
+                                <span asp-validation-for="Client.BirthDate" class="text-danger small"></span>
+                            </div>
 
-                        <a asp-page="Index" class="btn btn-secondary">
-                            Назад
-                        </a>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg py-2">
+                                    💾 Сохранить
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <a asp-page="Index" class="btn btn-link text-secondary">
+                                ◀️ Назад
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

@@ -2,82 +2,143 @@
 @model Car_Dealership.Pages.Clients.IndexModel
 @{
 }
-<div class="row justify-content-center">
-    <div class="col-12 col-lg-10">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .table-hover tbody tr:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+            transition: background-color 0.2s ease;
+        }
 
-        <div class="card shadow-sm mt-4">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Список клиентов</h5>
+        .btn-action {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-                <a asp-page="Create" class="btn btn-light btn-sm">
-                    + Добавить клиента
-                </a>
-            </div>
+            .btn-action:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h1 class="h3 mb-0">
+                                    <i class="bi bi-people-fill me-2"></i>
+                                    Список клиентов
+                                </h1>
+                                <p class="mb-0 mt-1 text-white-50 small">
+                                    Всего клиентов: @Model.Client.Count()
+                                </p>
+                            </div>
+                            <a asp-page="Create" class="btn btn-light">
+                                <i class="bi bi-plus-circle me-1"></i>
+                                Добавить клиента
+                            </a>
+                        </div>
+                    </div>
 
-            <div class="card-body p-0">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 align-middle">
+                                <thead class="table-light">
+                                    <tr class="text-uppercase small fw-bold text-secondary">
+                                        <th class="ps-3">
+                                            <i class="bi bi-person-fill me-1"></i>
+                                            ФИО
+                                        </th>
+                                        <th>
+                                            <i class="bi bi-calendar-check-fill me-1"></i>
+                                            Дата визита
+                                        </th>
+                                        <th>
+                                            <i class="bi bi-telephone-fill me-1"></i>
+                                            Телефон
+                                        </th>
+                                        <th>
+                                            <i class="bi bi-cake2-fill me-1"></i>
+                                            Дата рождения
+                                        </th>
+                                        <th class="text-end pe-3">Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var client in Model.Client)
+                                    {
+                                        <tr>
+                                            <td class="fw-semibold ps-3">
+                                                <i class="bi bi-person-circle me-2 text-primary"></i>
+                                                @client.FullName
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-info text-dark">
+                                                    <i class="bi bi-calendar me-1"></i>
+                                                    @client.VisitDate
+                                                </span>
+                                            </td>
+                                            <td>
+                                                @if (string.IsNullOrEmpty(client.PhoneNumber))
+                                                {
+                                                    <span class="text-muted fst-italic">—</span>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-phone me-1 text-success"></i>
+                                                    @client.PhoneNumber
+                                                }
+                                            </td>
+                                            <td>
+                                                <i class="bi bi-gift me-1 text-warning"></i>
+                                                @client.BirthDate.ToString()
+                                            </td>
+                                            <td class="text-end pe-3">
+                                                <a asp-page="Details"
+                                                   asp-route-id="@client.Id"
+                                                   class="btn btn-sm btn-outline-primary btn-action me-1">
+                                                    <i class="bi bi-eye me-1"></i>
+                                                    Открыть
+                                                </a>
+                                                <a asp-page="Edit"
+                                                   asp-route-id="@client.Id"
+                                                   class="btn btn-sm btn-outline-warning btn-action me-1">
+                                                    <i class="bi bi-pencil me-1"></i>
+                                                    Изменить
+                                                </a>
+                                                <a asp-page="Delete"
+                                                   asp-route-id="@client.Id"
+                                                   class="btn btn-sm btn-outline-danger btn-action">
+                                                    <i class="bi bi-trash me-1"></i>
+                                                    Удалить
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>FullName</th>
-                                <th>VisitDate</th>
-                                <th>Телефон</th>
-                                <th>Дата рождения</th>
-                                <th class="text-end">Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var client in Model.Client)
-                            {
-                                <tr>
-                                    <td class="fw-semibold">
-                                        @client.FullName
-                                    </td>
-
-                                    <td>
-                                        <span class="text-muted">
-                                            @client.VisitDate
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        @(string.IsNullOrEmpty(client.PhoneNumber)
-                                                                            ? "—"
-                                                                            : client.PhoneNumber)
-                                </td>
-
-                                    <td>
-                                        @client.BirthDate.ToString()
-                                    </td>
-
-                                    <td class="text-end">
-                                        <a asp-page="Details"
-                                           asp-route-id="@client.Id"
-                                           class="btn btn-sm btn-outline-primary me-1">
-                                            Открыть
-                                        </a>
-
-                                        <a asp-page="Edit"
-                                           asp-route-id="@client.Id"
-                                           class="btn btn-sm btn-outline-warning me-1">
-                                            Изменить
-                                        </a>
-
-                                        <a asp-page="Delete"
-                                           asp-route-id="@client.Id"
-                                           class="btn btn-sm btn-outline-danger">
-                                            Удалить
-                                        </a>
-                                    </td>
-                                </tr>
-                                                        }
-                        </tbody>
-                    </table>
+                    <div class="card-footer bg-white text-center py-3">
+                        <a asp-page="Index" class="text-decoration-none text-secondary">
+                            <i class="bi bi-arrow-repeat me-1"></i>
+                            Обновить список
+                        </a>
+                    </div>
                 </div>
-
             </div>
         </div>
-
     </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

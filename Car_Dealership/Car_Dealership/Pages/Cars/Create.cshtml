@@ -2,37 +2,70 @@
 @model Car_Dealership.Pages.Cars.CreateModel
 @{
 }
-<h1>Добавить автомобиль</h1>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h1 class="h3 mb-0">➕ Добавить автомобиль</h1>
+                    </div>
 
-<form method="post">
-    <div>
-        <label>Название</label><br />
-        <input asp-for="Car.Title" />
-        <span asp-validation-for="Car.BrandCar"></span>
+                    <div class="card-body p-4">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Название</label>
+                                <input asp-for="Car.Title" class="form-control form-control-lg" placeholder="Введите название автомобиля" />
+                                <span asp-validation-for="Car.BrandCar" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Модель</label>
+                                <select asp-for="Car.BrandCarId" asp-items="Model.BrandCars" class="form-select form-select-lg">
+                                    <option value="">Выберите модель</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Страна производитель</label>
+                                <input asp-for="Car.Country" class="form-control form-control-lg" placeholder="Введите страну производителя" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Цена</label>
+                                <input asp-for="Car.Price" type="number" class="form-control form-control-lg" placeholder="Введите цену в рублях" />
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-secondary">Год выпуска</label>
+                                <input asp-for="Car.YearOfManufacture" type="number" class="form-control form-control-lg" placeholder="Например: 2020" />
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg py-2">
+                                    💾 Сохранить
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <a asp-page="Index" class="btn btn-link text-secondary">
+                                ◀️ Назад
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div>
-        <label>Модель</label><br />
-        <select asp-for="Car.BrandCarId" asp-items="Model.BrandCars"> </select>
-    </div>
-
-    <div>
-        <label>Страна производитель</label><br />
-        <input asp-for="Car.Country" />
-    </div>
-
-    <div>
-        <label>Цена</label><br />
-        <input asp-for="Car.Price" type="number" />
-    </div>
-
-
-    <div>
-        <label>Год выпуска</label><br />
-        <input asp-for="Car.YearOfManufacture" type="number" />
-    </div>
-
-    <button type="submit">Сохранить</button>
-</form>
-
-<a asp-page="Index">Назад</a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

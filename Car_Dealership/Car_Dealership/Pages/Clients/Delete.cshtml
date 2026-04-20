@@ -2,40 +2,59 @@
 @model Car_Dealership.Pages.Clients.DeleteModel
 @{
 }
-<div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
-
-        <div class="card border-danger shadow-sm mt-4">
-            <div class="card-header bg-danger text-white">
-                <h5 class="mb-0">Подтверждение удаления</h5>
-            </div>
-
-            <div class="card-body">
-                <p class="mb-3">
-                    Вы действительно хотите удалить клиета:
-                </p>
-
-                <div class="alert alert-light border">
-                    <strong>@Model.Client.FullName</strong><br />
-                    <small class="text-muted">@Model.Client.PhoneNumber</small>
-                </div>
-
-                <form method="post">
-                    <input type="hidden" asp-for="Client.Id" />
-
-                    <div class="d-flex justify-content-between">
-                        <a asp-page="Index" class="btn btn-outline-secondary">
-                            Отмена
-                        </a>
-
-                        <button type="submit" class="btn btn-danger">
-                            Удалить
-                        </button>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-danger text-white text-center py-4">
+                        <h1 class="h3 mb-0">🗑️ Удалить клиента</h1>
                     </div>
-                </form>
+
+                    <div class="card-body p-4">
+                        <div class="alert alert-warning text-center mb-4">
+                            <h3 class="h5 mb-0">⚠️ Вы уверены?</h3>
+                        </div>
+
+                        <div class="bg-light p-4 rounded mb-4">
+                            <div class="mb-3 pb-3 border-bottom">
+                                <p class="text-secondary mb-1"><strong>ФИО клиента:</strong></p>
+                                <p class="h5 text-dark mb-0">@Model.Client.FullName</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <p class="text-secondary mb-1"><strong>Телефон:</strong></p>
+                                <p class="h5 text-dark mb-0">@Model.Client.PhoneNumber</p>
+                            </div>
+                        </div>
+
+                        <form method="post">
+                            <input type="hidden" asp-for="Client.Id" />
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-danger btn-lg py-2">
+                                    🗑️ Удалить
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <a asp-page="Index" class="btn btn-link text-secondary">
+                                ◀️ Отмена
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
-
     </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

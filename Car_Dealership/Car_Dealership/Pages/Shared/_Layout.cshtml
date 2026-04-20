@@ -33,6 +33,15 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Clients/Index">Клиенты</a>
                         </li>
                     </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        @*+++ темная тема*@
+                        <li class="nav-item">
+                            <button class="btn btn-outline-secondary" onclick="toggleTheme()">🌓 Переключить тему</button>
+                        </li>
+                        @*--- темная тема*@
+                    </ul>
+
                 </div>
             </div>
         </nav>
@@ -56,3 +65,31 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    // Функция для применения темы
+    function applyTheme(theme) {
+        document.documentElement.setAttribute("data-bs-theme", theme);
+        localStorage.setItem("theme", theme);
+    }
+    // Функция отслежиживания темы windows
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+            html.setAttribute("data-bs-theme", e.matches ? "dark" : "light");
+        });
+
+    // Функция для переключения темы
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute("data-bs-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        applyTheme(newTheme);
+    }
+
+    // При загрузке страницы применяем сохраненную тему
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else {
+        // Если тема не сохранена, проверяем системные настройки
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        applyTheme(prefersDark ? "dark" : "light");
+    }
+</script>
