@@ -13,8 +13,7 @@
 
     <div>
         <label>Модель</label><br />
-        <select asp-for="Car.BrandCarId"
-				asp-items="@(new SelectList(Model.BrandCar, "Id", "Name"))"> 
+        <select asp-for="Car.BrandCarId" asp-items="Model.BrandCars"> </select>
     </div>
 
     <div>

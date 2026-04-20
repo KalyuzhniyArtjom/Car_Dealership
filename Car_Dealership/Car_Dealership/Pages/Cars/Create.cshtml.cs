@@ -20,10 +20,10 @@ namespace Car_Dealership.Pages.Cars
 
         public void OnGet()
         {
-            SelectList Brand = new SelectList(_context.BrandCars.ToList(), "Id", "Id");
+             BrandCars = new SelectList(_context.BrandCars.ToList(), "Id", "Name");
         }
 
-
+        public SelectList BrandCars { get; set; }   
 
         public IActionResult OnPost()
         {

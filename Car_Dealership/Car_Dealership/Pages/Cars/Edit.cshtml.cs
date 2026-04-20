@@ -22,7 +22,7 @@ namespace Car_Dealership.Pages.Cars
         {
             Car = _context.Cars
                 .Where(c => c.Id == id)
-                .Include(c => c.Brand)
+                .Include(c => c.BrandCar)
                 .FirstOrDefault();
 
             if (Car == null)

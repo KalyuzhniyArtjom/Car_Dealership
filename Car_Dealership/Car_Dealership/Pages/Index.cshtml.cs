@@ -14,7 +14,8 @@ namespace Car_Dealership.Pages
 
         async public Task<IActionResult> OnGet()
         {
-            return RedirectToPage("/Devices/index");
+            //return RedirectToPage("/Car/Index");
+            return Page();
         }
     }
 }
