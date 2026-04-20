@@ -19,8 +19,8 @@ namespace Car_Dealership.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<BrandCar>().HasData(
                 new BrandCar { Id = 1, Name = "BMW" },
-                new BrandCar { Id = 1, Name = "Mercedes" },
-                new BrandCar { Id = 1, Name = "Audi" }
+                new BrandCar { Id = 2, Name = "Mercedes" },
+                new BrandCar { Id = 3, Name = "Audi" }
                 );
         }
             

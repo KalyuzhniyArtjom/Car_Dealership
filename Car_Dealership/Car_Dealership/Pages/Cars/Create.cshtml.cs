@@ -2,6 +2,7 @@ using Car_Dealership.Data;
 using Car_Dealership.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Car_Dealership.Pages.Cars
 {
@@ -17,7 +18,10 @@ namespace Car_Dealership.Pages.Cars
         [BindProperty]
         public Car Car { get; set; }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+            SelectList Brand = new SelectList(_context.BrandCars.ToList(), "Id", "Id");
+        }
 
 
 

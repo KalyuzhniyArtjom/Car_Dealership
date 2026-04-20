@@ -20,7 +20,7 @@ namespace Car_Dealership.Pages.Cars
 
         public void OnGet()
         {
-            Cars = _context.Cars.Include(c => c.Brand).ToList();
+            Cars = _context.Cars.Include(c => c.BrandCar).ToList();
         }
     }
 }

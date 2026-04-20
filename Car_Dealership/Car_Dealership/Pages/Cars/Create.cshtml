@@ -8,7 +8,13 @@
     <div>
         <label>Название</label><br />
         <input asp-for="Car.Title" />
-        <span asp-validation-for="Car.Brand"></span>
+        <span asp-validation-for="Car.BrandCar"></span>
+    </div>
+
+    <div>
+        <label>Модель</label><br />
+        <select asp-for="Car.BrandCarId"
+				asp-items="@(new SelectList(Model.BrandCar, "Id", "Name"))"> 
     </div>
 
     <div>
