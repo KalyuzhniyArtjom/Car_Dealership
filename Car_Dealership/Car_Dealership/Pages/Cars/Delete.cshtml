@@ -3,54 +3,342 @@
 @{
 }
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-bs-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            transition: background-color 0.3s ease;
+            min-height: 100vh;
+            padding: 2rem 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        [data-bs-theme="light"] body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-bs-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .card {
+            border: none;
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .card {
+            background: white;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-bs-theme="dark"] .card {
+            background: #2d2d44;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-header {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-bs-theme="light"] .card-header {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        [data-bs-theme="dark"] .card-header {
+            background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .card-header h1 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .warning-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .alert-custom {
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+
+        [data-bs-theme="light"] .alert-custom {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        [data-bs-theme="dark"] .alert-custom {
+            background: #451a03;
+            color: #fde68a;
+        }
+
+        .info-card {
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .info-card {
+            background: #f8f9fa;
+        }
+
+        [data-bs-theme="dark"] .info-card {
+            background: #1a1a2e;
+        }
+
+        .info-item {
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid;
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .info-item {
+            border-bottom-color: #e2e8f0;
+        }
+
+        [data-bs-theme="dark"] .info-item {
+            border-bottom-color: #3d3d5e;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        [data-bs-theme="light"] .info-label {
+            color: #6c757d;
+        }
+
+        [data-bs-theme="dark"] .info-label {
+            color: #94a3b8;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        [data-bs-theme="light"] .info-value {
+            color: #2d3748;
+        }
+
+        [data-bs-theme="dark"] .info-value {
+            color: #e2e8f0;
+        }
+
+        .btn-group-custom {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-custom {
+            padding: 0.7rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+            .btn-custom:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+            .btn-delete:hover {
+                background: linear-gradient(135deg, #dc2626, #b91c1c);
+                color: white;
+            }
+
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+        }
+
+            .btn-cancel:hover {
+                background: #5a6268;
+                color: white;
+            }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+        }
+
+        [data-bs-theme="light"] .theme-toggle {
+            background: #2d3748;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-bs-theme="dark"] .theme-toggle {
+            background: #f59e0b;
+            color: #1a1a2e;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card shadow-lg border-0">
-                    <div class="card-header bg-danger text-white text-center py-4">
-                        <h1 class="h3 mb-0">🗑️ Удалить автомобиль</h1>
+                <div class="card">
+                    <div class="card-header text-white">
+                        <div class="warning-icon">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                        </div>
+                        <h1 class="h3 mb-0">Удалить автомобиль</h1>
+                        <p class="mb-0 mt-2 opacity-75 small">Это действие нельзя отменить</p>
                     </div>
 
                     <div class="card-body p-4">
-                        <div class="alert alert-warning text-center mb-4">
-                            <h3 class="h5 mb-0">⚠️ Вы уверены?</h3>
+                        <div class="alert-custom">
+                            <i class="bi bi-exclamation-circle-fill me-2"></i>
+                            <strong>Внимание!</strong> Вы действительно хотите удалить этот автомобиль?
                         </div>
 
-                        <div class="bg-light p-4 rounded mb-4">
-                            <p class="mb-2"><strong class="text-secondary">Название:</strong></p>
-                            <p class="h5 text-dark mb-3">@Model.Car.Title</p>
+                        <div class="info-card">
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i class="bi bi-car-front-fill"></i>
+                                    Название автомобиля
+                                </div>
+                                <div class="info-value">@Model.Car.Title</div>
+                            </div>
 
-                            <p class="mb-2"><strong class="text-secondary">Страна:</strong></p>
-                            <p class="h5 text-dark mb-0">@Model.Car.Country</p>
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    Страна производитель
+                                </div>
+                                <div class="info-value">@Model.Car.Country</div>
+                            </div>
                         </div>
 
                         <form method="post">
                             <input type="hidden" asp-for="Car.Id" />
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-danger btn-lg py-2">
-                                    🗑️ Удалить
+                            <div class="btn-group-custom">
+                                <button type="submit" class="btn-custom btn-delete">
+                                    <i class="bi bi-trash3-fill me-2"></i>
+                                    Да, удалить
                                 </button>
+                                <a asp-page="Index" class="btn-custom btn-cancel">
+                                    <i class="bi bi-x-circle me-2"></i>
+                                    Отмена
+                                </a>
                             </div>
                         </form>
-
-                        <div class="text-center mt-3">
-                            <a asp-page="Index" class="btn btn-link text-secondary">
-                                ◀️ Отмена
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Кнопка переключения темы -->
+    <button id="themeToggle" class="theme-toggle">
+        <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+    </button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+            const icon = document.getElementById('themeIcon');
+            if (theme === 'dark') {
+                icon.className = 'bi bi-sun-fill';
+            } else {
+                icon.className = 'bi bi-moon-stars-fill';
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function getSystemTheme() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(getSystemTheme());
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    </script>
 </body>
 </html>

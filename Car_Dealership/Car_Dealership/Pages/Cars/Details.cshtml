@@ -1,49 +1,343 @@
 ﻿@page
-@model Car_Dealership.Pages.Cars.DetailsModel
+@model Car_Dealership.Pages.Clients.DetailsModel
 @{
 }
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-bs-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            transition: background-color 0.3s ease;
+            min-height: 100vh;
+            padding: 2rem 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        [data-bs-theme="light"] body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-bs-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .card {
+            border: none;
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .card {
+            background: white;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-bs-theme="dark"] .card {
+            background: #2d2d44;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-header {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-bs-theme="light"] .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-bs-theme="dark"] .card-header {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .card-header h1 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .info-card {
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .info-card {
+            background: #f8f9fa;
+        }
+
+        [data-bs-theme="dark"] .info-card {
+            background: #1a1a2e;
+        }
+
+        .info-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid;
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .info-item {
+            border-bottom-color: #e2e8f0;
+        }
+
+        [data-bs-theme="dark"] .info-item {
+            border-bottom-color: #3d3d5e;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        [data-bs-theme="light"] .info-label {
+            color: #6c757d;
+        }
+
+        [data-bs-theme="dark"] .info-label {
+            color: #94a3b8;
+        }
+
+        .info-label i {
+            font-size: 1rem;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        [data-bs-theme="light"] .info-value {
+            color: #2d3748;
+        }
+
+        [data-bs-theme="dark"] .info-value {
+            color: #e2e8f0;
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: normal;
+            margin-left: 0.5rem;
+        }
+
+        .badge-birthday {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+        }
+
+        .badge-visit-today {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .btn-group-custom {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-custom {
+            padding: 0.7rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+        }
+
+            .btn-custom:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            }
+
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            border: none;
+        }
+
+            .btn-back:hover {
+                background: #5a6268;
+                color: white;
+            }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+        }
+
+        [data-bs-theme="light"] .theme-toggle {
+            background: #2d3748;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-bs-theme="dark"] .theme-toggle {
+            background: #f59e0b;
+            color: #1a1a2e;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
     <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-lg border-0">
-                    <div class="card-header bg-success text-white text-center py-4">
-                        <h1 class="h3 mb-0">ℹ️ Информация об автомобиле</h1>
+            <div class="col-md-8 col-lg-7">
+                <div class="card">
+                    <div class="card-header text-white">
+                        <div class="avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <h1 class="h3 mb-0">Информация о клиенте</h1>
+                        <p class="mb-0 mt-2 opacity-75 small">ID: @Model.Client.Id</p>
                     </div>
 
                     <div class="card-body p-4">
-                        <div class="bg-light p-4 rounded mb-4">
-                            <div class="mb-3 pb-3 border-bottom">
-                                <p class="text-secondary mb-1"><strong>Название:</strong></p>
-                                <p class="h5 text-dark mb-0">@Model.Car.Title</p>
+                        <div class="info-card">
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i class="bi bi-person-fill"></i>
+                                    ФИО клиента
+                                </div>
+                                <div class="info-value">@Model.Client.FullName</div>
                             </div>
 
-                            <div class="mb-3 pb-3 border-bottom">
-                                <p class="text-secondary mb-1"><strong>Страна:</strong></p>
-                                <p class="h5 text-dark mb-0">@Model.Car.Country</p>
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i class="bi bi-calendar-check-fill"></i>
+                                    Дата визита
+                                </div>
+                                <div class="info-value">
+                                    @Model.Client.VisitDate.ToString("dd.MM.yyyy")
+                                    @if (Model.Client.VisitDate.Date == DateTime.Now.Date)
+                                    {
+                                        <span class="badge-status badge-visit-today">
+                                            <i class="bi bi-star-fill me-1"></i>Сегодня
+                                        </span>
+                                    }
+                                </div>
                             </div>
 
-                            <div class="mb-3 pb-3 border-bottom">
-                                <p class="text-secondary mb-1"><strong>Год выпуска:</strong></p>
-                                <p class="h5 text-dark mb-0">@Model.Car.YearOfManufacture</p>
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i class="bi bi-telephone-fill"></i>
+                                    Номер телефона
+                                </div>
+                                <div class="info-value">
+                                    @if (string.IsNullOrEmpty(Model.Client.PhoneNumber))
+                                    {
+                                        <span class="fst-italic opacity-50">Не указан</span>
+                                    }
+                                    else
+                                    {
+                                        @Model.Client.PhoneNumber
+                                    }
+                                </div>
                             </div>
 
-                            <div class="mb-3">
-                                <p class="text-secondary mb-1"><strong>Цена:</strong></p>
-                                <p class="h5 text-success mb-0 fw-bold">@Model.Car.Price ₽</p>
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i class="bi bi-cake2-fill"></i>
+                                    Дата рождения
+                                </div>
+                                <div class="info-value">
+                                    @Model.Client.BirthDate.ToString("dd.MM.yyyy")
+                                    @if (Model.Client.BirthDate.Month == DateTime.Now.Month && Model.Client.BirthDate.Day == DateTime.Now.Day)
+                                    {
+                                        <span class="badge-status badge-birthday">
+                                            <i class="bi bi-gift-fill me-1"></i>Сегодня день рождения!
+                                        </span>
+                                    }
+                                </div>
                             </div>
                         </div>
 
-                        <div class="text-center">
-                            <a asp-page="Index" class="btn btn-success btn-lg px-4">
-                                ◀️ Назад к списку
+                        <div class="btn-group-custom">
+                            <a asp-page="Index" class="btn-custom btn-back">
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Назад
+                            </a>
+                            <a asp-page="Edit" asp-route-id="@Model.Client.Id" class="btn-custom btn-edit">
+                                <i class="bi bi-pencil-fill me-2"></i>
+                                Редактировать
+                            </a>
+                            <a asp-page="Delete" asp-route-id="@Model.Client.Id" class="btn-custom btn-delete">
+                                <i class="bi bi-trash3-fill me-2"></i>
+                                Удалить
                             </a>
                         </div>
                     </div>
@@ -52,6 +346,42 @@
         </div>
     </div>
 
+    <!-- Кнопка переключения темы -->
+    <button id="themeToggle" class="theme-toggle">
+        <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+    </button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+            const icon = document.getElementById('themeIcon');
+            if (theme === 'dark') {
+                icon.className = 'bi bi-sun-fill';
+            } else {
+                icon.className = 'bi bi-moon-stars-fill';
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function getSystemTheme() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(getSystemTheme());
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    </script>
 </body>
 </html>

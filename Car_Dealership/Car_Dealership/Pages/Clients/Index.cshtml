@@ -3,142 +3,542 @@
 @{
 }
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-bs-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        .table-hover tbody tr:hover {
-            background-color: rgba(13, 110, 253, 0.05);
-            transition: background-color 0.2s ease;
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            padding: 2rem 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .btn-action {
-            transition: transform 0.2s, box-shadow 0.2s;
+        [data-bs-theme="light"] body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-            .btn-action:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        [data-bs-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        /* Статистика */
+        .stats-card {
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .stats-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        [data-bs-theme="dark"] .stats-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+            .stat-item:hover {
+                transform: translateY(-5px);
             }
+
+        [data-bs-theme="light"] .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-bs-theme="dark"] .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        [data-bs-theme="light"] .stat-number {
+            color: white;
+        }
+
+        [data-bs-theme="dark"] .stat-number {
+            color: #818cf8;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        [data-bs-theme="light"] .stat-label {
+            color: white;
+        }
+
+        [data-bs-theme="dark"] .stat-label {
+            color: #cbd5e0;
+        }
+
+        /* Карточка клиента */
+        .client-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+            .client-card:hover {
+                transform: translateY(-8px);
+            }
+
+        [data-bs-theme="light"] .client-card {
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+            [data-bs-theme="light"] .client-card:hover {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            }
+
+        [data-bs-theme="dark"] .client-card {
+            background: #2d2d44;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+            [data-bs-theme="dark"] .client-card:hover {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            }
+
+        .client-header {
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        [data-bs-theme="light"] .client-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-bs-theme="dark"] .client-header {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+        }
+
+        .client-avatar {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .client-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+            color: white;
+        }
+
+        .client-id {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            color: white;
+        }
+
+        .client-body {
+            padding: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            padding: 0.6rem;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        [data-bs-theme="light"] .info-row {
+            background: #f8f9fa;
+        }
+
+        [data-bs-theme="dark"] .info-row {
+            background: #1a1a2e;
+        }
+
+        .info-row:hover {
+            transform: translateX(5px);
+        }
+
+        .info-icon {
+            width: 35px;
+            font-size: 1.2rem;
+        }
+
+        [data-bs-theme="light"] .info-icon {
+            color: #667eea;
+        }
+
+        [data-bs-theme="dark"] .info-icon {
+            color: #818cf8;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        [data-bs-theme="light"] .info-label {
+            color: #6c757d;
+        }
+
+        [data-bs-theme="dark"] .info-label {
+            color: #94a3b8;
+        }
+
+        .info-value {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        [data-bs-theme="light"] .info-value {
+            color: #333;
+        }
+
+        [data-bs-theme="dark"] .info-value {
+            color: #e2e8f0;
+        }
+
+        .badge-visit {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        [data-bs-theme="light"] .badge-visit {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        [data-bs-theme="dark"] .badge-visit {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            color: #818cf8;
+        }
+
+        .btn-group-card {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-card {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+            .btn-card:hover {
+                transform: translateY(-2px);
+            }
+
+        .btn-outline-primary {
+            border: 1px solid #667eea;
+            background: transparent;
+            color: #667eea;
+        }
+
+            .btn-outline-primary:hover {
+                background: #667eea;
+                color: white;
+            }
+
+        [data-bs-theme="dark"] .btn-outline-primary {
+            border-color: #818cf8;
+            color: #818cf8;
+        }
+
+            [data-bs-theme="dark"] .btn-outline-primary:hover {
+                background: #818cf8;
+                color: #1a1a2e;
+            }
+
+        .btn-outline-warning {
+            border: 1px solid #f59e0b;
+            background: transparent;
+            color: #f59e0b;
+        }
+
+            .btn-outline-warning:hover {
+                background: #f59e0b;
+                color: white;
+            }
+
+        .btn-outline-danger {
+            border: 1px solid #ef4444;
+            background: transparent;
+            color: #ef4444;
+        }
+
+            .btn-outline-danger:hover {
+                background: #ef4444;
+                color: white;
+            }
+
+        .theme-toggle {
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+        }
+
+            .theme-toggle:hover {
+                transform: scale(1.05);
+            }
+
+        [data-bs-theme="light"] .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+        }
+
+        [data-bs-theme="dark"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.3);
+            color: #818cf8;
+            border: 1px solid #818cf8;
+        }
+
+        .btn-add {
+            border-radius: 12px;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.3s;
+        }
+
+        [data-bs-theme="light"] .btn-add {
+            background: white;
+            color: #667eea;
+            border: none;
+        }
+
+        [data-bs-theme="dark"] .btn-add {
+            background: #818cf8;
+            color: #1a1a2e;
+            border: none;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
-<body class="bg-light">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="card shadow-lg border-0">
-                    <div class="card-header bg-primary text-white py-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h1 class="h3 mb-0">
-                                    <i class="bi bi-people-fill me-2"></i>
-                                    Список клиентов
-                                </h1>
-                                <p class="mb-0 mt-1 text-white-50 small">
-                                    Всего клиентов: @Model.Client.Count()
-                                </p>
-                            </div>
-                            <a asp-page="Create" class="btn btn-light">
-                                <i class="bi bi-plus-circle me-1"></i>
-                                Добавить клиента
-                            </a>
+<body>
+    <div class="container">
+        <!-- Статистика -->
+        <div class="stats-card">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="stat-item">
+                        <div class="stat-number">@Model.Client.Count()</div>
+                        <div class="stat-label">
+                            <i class="bi bi-people-fill me-1"></i>
+                            Всего клиентов
                         </div>
                     </div>
-
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-hover mb-0 align-middle">
-                                <thead class="table-light">
-                                    <tr class="text-uppercase small fw-bold text-secondary">
-                                        <th class="ps-3">
-                                            <i class="bi bi-person-fill me-1"></i>
-                                            ФИО
-                                        </th>
-                                        <th>
-                                            <i class="bi bi-calendar-check-fill me-1"></i>
-                                            Дата визита
-                                        </th>
-                                        <th>
-                                            <i class="bi bi-telephone-fill me-1"></i>
-                                            Телефон
-                                        </th>
-                                        <th>
-                                            <i class="bi bi-cake2-fill me-1"></i>
-                                            Дата рождения
-                                        </th>
-                                        <th class="text-end pe-3">Действия</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var client in Model.Client)
-                                    {
-                                        <tr>
-                                            <td class="fw-semibold ps-3">
-                                                <i class="bi bi-person-circle me-2 text-primary"></i>
-                                                @client.FullName
-                                            </td>
-                                            <td>
-                                                <span class="badge bg-info text-dark">
-                                                    <i class="bi bi-calendar me-1"></i>
-                                                    @client.VisitDate
-                                                </span>
-                                            </td>
-                                            <td>
-                                                @if (string.IsNullOrEmpty(client.PhoneNumber))
-                                                {
-                                                    <span class="text-muted fst-italic">—</span>
-                                                }
-                                                else
-                                                {
-                                                    <i class="bi bi-phone me-1 text-success"></i>
-                                                    @client.PhoneNumber
-                                                }
-                                            </td>
-                                            <td>
-                                                <i class="bi bi-gift me-1 text-warning"></i>
-                                                @client.BirthDate.ToString()
-                                            </td>
-                                            <td class="text-end pe-3">
-                                                <a asp-page="Details"
-                                                   asp-route-id="@client.Id"
-                                                   class="btn btn-sm btn-outline-primary btn-action me-1">
-                                                    <i class="bi bi-eye me-1"></i>
-                                                    Открыть
-                                                </a>
-                                                <a asp-page="Edit"
-                                                   asp-route-id="@client.Id"
-                                                   class="btn btn-sm btn-outline-warning btn-action me-1">
-                                                    <i class="bi bi-pencil me-1"></i>
-                                                    Изменить
-                                                </a>
-                                                <a asp-page="Delete"
-                                                   asp-route-id="@client.Id"
-                                                   class="btn btn-sm btn-outline-danger btn-action">
-                                                    <i class="bi bi-trash me-1"></i>
-                                                    Удалить
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="stat-item">
+                        <div class="stat-number">
+                            @Model.Client.Count(c => c.VisitDate >= DateTime.Now.AddMonths(-1))
+                        </div>
+                        <div class="stat-label">
+                            <i class="bi bi-calendar-check-fill me-1"></i>
+                            За последний месяц
                         </div>
                     </div>
-
-                    <div class="card-footer bg-white text-center py-3">
-                        <a asp-page="Index" class="text-decoration-none text-secondary">
-                            <i class="bi bi-arrow-repeat me-1"></i>
-                            Обновить список
-                        </a>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">
+                            @Model.Client.Count(c => c.BirthDate.Month == DateTime.Now.Month)
+                        </div>
+                        <div class="stat-label">
+                            <i class="bi bi-gift-fill me-1"></i>
+                            Именинников в этом месяце
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Заголовок -->
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <h2 class="text-white mb-0">
+                <i class="bi bi-people-fill me-2"></i>
+                Наши клиенты
+            </h2>
+            <div>
+                <button id="themeToggle" class="theme-toggle me-2">
+                    <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+                    <span class="ms-1">Тема</span>
+                </button>
+                <a asp-page="Create" class="btn btn-add">
+                    <i class="bi bi-plus-circle me-1"></i>
+                    Добавить клиента
+                </a>
+            </div>
+        </div>
+
+        <!-- Карточки клиентов -->
+        <div class="row">
+            @foreach (var client in Model.Client)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="client-card">
+                        <div class="client-header">
+                            <div class="client-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="client-name">@client.FullName</div>
+                            <div class="client-id">ID: @client.Id</div>
+                        </div>
+                        <div class="client-body">
+                            <div class="info-row">
+                                <div class="info-icon">
+                                    <i class="bi bi-calendar-check"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="info-label">Дата визита</div>
+                                    <div class="info-value">@client.VisitDate.ToString("dd.MM.yyyy")</div>
+                                </div>
+                                <div class="badge-visit">
+                                    @if (client.VisitDate.Date == DateTime.Now.Date)
+                                    {
+                                        <span>Сегодня</span>
+                                    }
+                                    else if (client.VisitDate > DateTime.Now)
+                                    {
+                                        <span>Предстоит</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Был в гостях</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="info-row">
+                                <div class="info-icon">
+                                    <i class="bi bi-telephone"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="info-label">Телефон</div>
+                                    <div class="info-value">
+                                        @if (string.IsNullOrEmpty(client.PhoneNumber))
+                                        {
+                                            <span class="fst-italic opacity-50">Не указан</span>
+                                        }
+                                        else
+                                        {
+                                            @client.PhoneNumber
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-row">
+                                <div class="info-icon">
+                                    <i class="bi bi-cake2"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="info-label">Дата рождения</div>
+                                    <div class="info-value">
+                                        @client.BirthDate.ToString("dd.MM.yyyy")
+                                        @if (client.BirthDate.Month == DateTime.Now.Month && client.BirthDate.Day == DateTime.Now.Day)
+                                        {
+                                            <span class="badge bg-danger ms-1">Сегодня!</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="btn-group-card">
+                                <a asp-page="Details" asp-route-id="@client.Id" class="btn-card btn-outline-primary">
+                                    <i class="bi bi-eye me-1"></i> Открыть
+                                </a>
+                                <a asp-page="Edit" asp-route-id="@client.Id" class="btn-card btn-outline-warning">
+                                    <i class="bi bi-pencil me-1"></i> Изменить
+                                </a>
+                                <a asp-page="Delete" asp-route-id="@client.Id" class="btn-card btn-outline-danger">
+                                    <i class="bi bi-trash me-1"></i> Удалить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (!Model.Client.Any())
+        {
+            <div class="text-center text-white mt-5">
+                <i class="bi bi-emoji-frown" style="font-size: 4rem;"></i>
+                <h4 class="mt-3">Нет клиентов</h4>
+                <p>Добавьте первого клиента, нажав кнопку "Добавить клиента"</p>
+            </div>
+        }
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+            const icon = document.getElementById('themeIcon');
+            if (theme === 'dark') {
+                icon.className = 'bi bi-sun-fill';
+            } else {
+                icon.className = 'bi bi-moon-stars-fill';
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function getSystemTheme() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(getSystemTheme());
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    </script>
 </body>
 </html>

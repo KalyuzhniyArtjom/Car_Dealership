@@ -27,6 +27,26 @@
                                 <input asp-for="Car.Title" class="form-control form-control-lg" placeholder="Введите название автомобиля" />
                             </div>
 
+                            <!-- ВАЖНО! Выпадающий список для выбора бренда -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Бренд</label>
+                                <select asp-for="Car.BrandCarId" class="form-select form-select-lg">
+                                    <option value="">-- Выберите бренд --</option>
+                                    @foreach (var brand in Model.Brands)
+                                    {
+                                        if (Model.Car.BrandCarId == brand.Id)
+                                        {
+                                            <option value="@brand.Id" selected>@brand.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@brand.Id">@brand.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="Car.BrandCarId" class="text-danger"></span>
+                            </div>
+
                             <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary">Страна</label>
                                 <input asp-for="Car.Country" class="form-control form-control-lg" placeholder="Введите страну производителя" />
