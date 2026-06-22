@@ -1,0 +1,36 @@
+﻿@page
+@model Car_Dealership.Pages.Account.User.DeleteModel
+@{
+}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+                <div class="bg-danger" style="height: 4px;"></div>
+
+                <div class="card-body p-4 text-center">
+                    <h3 class="h4 card-title text-danger mb-3">Удалить пользователя?</h3>
+                    <p class="text-muted small mb-4">Вы уверены, что хотите безвозвратно удалить этого пользователя?</p>
+
+                    <div class="bg-body-secondary p-3 rounded-3 text-start mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="text-truncate w-100">
+                                <div class="fw-bold text-truncate text-primary">@Model.User.Email</div>
+                                <div class="small text-muted">Роль: @Model.User.Role</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="post">
+                        <input type="hidden" asp-for="User.Id" />
+
+                        <div class="d-flex justify-content-center gap-2">
+                            <button type="submit" class="btn btn-danger rounded-pill px-4">Да, удалить</button>
+                            <a asp-page="Index" class="btn btn-outline-secondary rounded-pill px-4">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

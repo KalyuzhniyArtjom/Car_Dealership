@@ -1,0 +1,38 @@
+﻿@page
+@model Car_Dealership.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Вход";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow rounded-4 border-0">
+                <div class="card-header bg-dark text-white text-center py-3 rounded-top-4">
+                    <h4 class="mb-0 h5">Вход на сайт</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Email" class="form-label fw-semibold small">Email адрес</label>
+                            <input asp-for="Input.Email" class="form-control" placeholder="name@example.com" />
+                            <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Input.Password" class="form-label fw-semibold small">Пароль</label>
+                            <input asp-for="Input.Password" class="form-control" type="password" placeholder="Введите пароль" />
+                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">Войти</button>
+                            <a asp-page="./Register" class="btn btn-outline-secondary rounded-pill px-4">Регистрация</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

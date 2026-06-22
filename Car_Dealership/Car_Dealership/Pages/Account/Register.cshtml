@@ -1,0 +1,48 @@
+﻿@page
+@model Car_Dealership.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow rounded-4 border-0">
+                <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+                    <h4 class="mb-0 h5">Регистрация аккаунта</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Email" class="form-label fw-semibold small">Email адрес</label>
+                            <input asp-for="Input.Email" class="form-control" placeholder="name@example.com" />
+                            <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Password" class="form-label fw-semibold small">Пароль</label>
+                            <input asp-for="Input.Password" type="password" class="form-control" placeholder="Минимум 6 символов" />
+                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Input.ConfirmPassword" class="form-label fw-semibold small">Повторите пароль</label>
+                            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Введите пароль еще раз" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">Зарегистрироваться</button>
+                            <a asp-page="./Login" class="btn btn-outline-secondary rounded-pill px-4">Уже есть аккаунт? Войти</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

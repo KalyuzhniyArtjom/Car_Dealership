@@ -1,0 +1,40 @@
+﻿@page
+@model Car_Dealership.Pages.Account.ProfileModel
+@{
+    ViewData["Title"] = "Профиль";
+}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow rounded-4">
+            <div class="card-header bg-dark text-white text-center rounded-top-4">
+                <h5 class="mb-0">Профиль пользователя</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-4 text-center">
+                    <p class="text-muted">Информация о вашем аккаунте.</p>
+                </div>
+
+                <dl class="row">
+                    <dt class="col-sm-4">Email</dt>
+                    <dd class="col-sm-8">@User.Identity?.Name</dd>
+
+                    <dt class="col-sm-4">Роль</dt>
+                    <dd class="col-sm-8">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <span>Admin</span>
+                        }
+                        else
+                        {
+                            <span>User</span>
+                        }
+                    </dd>
+                </dl>
+
+                <div class="text-center mt-3">
+                    <a asp-page="/Index" class="btn btn-outline-secondary rounded-pill px-4">На главную</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
