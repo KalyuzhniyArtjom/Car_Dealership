@@ -3,38 +3,53 @@
 @{
     ViewData["Title"] = "Регистрация";
 }
-<div class="container mt-5">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <div class="card shadow rounded-4 border-0">
-                <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
-                    <h4 class="mb-0 h5">Регистрация аккаунта</h4>
-                </div>
-                <div class="card-body p-4">
+        <div class="col-lg-5 col-md-7">
+            <div class="card-dark">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-user-plus" style="font-size: 2.5rem; color: var(--accent);"></i>
+                        <h2 class="h4 fw-bold mt-2" style="color: var(--text-primary);">Создать аккаунт</h2>
+                        <p class="text-muted small">Присоединяйтесь к Apex Motors</p>
+                    </div>
+
                     <form method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
 
                         <div class="mb-3">
-                            <label asp-for="Input.Email" class="form-label fw-semibold small">Email адрес</label>
-                            <input asp-for="Input.Email" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.Email" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-envelope me-2" style="color: var(--accent);"></i>Email адрес
+                            </label>
+                            <input asp-for="Input.Email" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" placeholder="user@example.com" />
                             <span asp-validation-for="Input.Email" class="text-danger small"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Input.Password" class="form-label fw-semibold small">Пароль</label>
-                            <input asp-for="Input.Password" type="password" class="form-control" placeholder="Минимум 6 символов" />
+                            <label asp-for="Input.Password" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-lock me-2" style="color: var(--accent);"></i>Пароль
+                            </label>
+                            <input asp-for="Input.Password" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" type="password" placeholder="Минимум 6 символов" />
                             <span asp-validation-for="Input.Password" class="text-danger small"></span>
                         </div>
 
                         <div class="mb-4">
-                            <label asp-for="Input.ConfirmPassword" class="form-label fw-semibold small">Повторите пароль</label>
-                            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Введите пароль еще раз" />
+                            <label asp-for="Input.ConfirmPassword" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-check-circle me-2" style="color: var(--accent);"></i>Подтвердите пароль
+                            </label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" type="password" placeholder="Повторите пароль" />
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
                         </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary rounded-pill px-4">Зарегистрироваться</button>
-                            <a asp-page="./Login" class="btn btn-outline-secondary rounded-pill px-4">Уже есть аккаунт? Войти</a>
+                        <button type="submit" class="btn-gold w-100" style="padding: 12px;">
+                            <i class="fas fa-user-plus me-2"></i>Зарегистрироваться
+                        </button>
+
+                        <div class="text-center mt-3">
+                            <span class="text-muted" style="font-size: 0.85rem;">Уже есть аккаунт?</span>
+                            <a asp-page="./Login" style="color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem;">
+                                Войти
+                            </a>
                         </div>
                     </form>
                 </div>

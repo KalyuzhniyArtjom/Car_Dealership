@@ -3,32 +3,45 @@
 @{
     ViewData["Title"] = "Вход";
 }
-<div class="container mt-5">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <div class="card shadow rounded-4 border-0">
-                <div class="card-header bg-dark text-white text-center py-3 rounded-top-4">
-                    <h4 class="mb-0 h5">Вход на сайт</h4>
-                </div>
-                <div class="card-body p-4">
+        <div class="col-lg-5 col-md-7">
+            <div class="card-dark">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-crown" style="font-size: 2.5rem; color: var(--accent);"></i>
+                        <h2 class="h4 fw-bold mt-2" style="color: var(--text-primary);">Добро пожаловать</h2>
+                        <p class="text-muted small">Войдите в свой аккаунт</p>
+                    </div>
+
                     <form method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
 
                         <div class="mb-3">
-                            <label asp-for="Input.Email" class="form-label fw-semibold small">Email адрес</label>
-                            <input asp-for="Input.Email" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.Email" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-envelope me-2" style="color: var(--accent);"></i>Email адрес
+                            </label>
+                            <input asp-for="Input.Email" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" placeholder="user@example.com" />
                             <span asp-validation-for="Input.Email" class="text-danger small"></span>
                         </div>
 
                         <div class="mb-4">
-                            <label asp-for="Input.Password" class="form-label fw-semibold small">Пароль</label>
-                            <input asp-for="Input.Password" class="form-control" type="password" placeholder="Введите пароль" />
+                            <label asp-for="Input.Password" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-lock me-2" style="color: var(--accent);"></i>Пароль
+                            </label>
+                            <input asp-for="Input.Password" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" type="password" placeholder="••••••••" />
                             <span asp-validation-for="Input.Password" class="text-danger small"></span>
                         </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary rounded-pill px-4">Войти</button>
-                            <a asp-page="./Register" class="btn btn-outline-secondary rounded-pill px-4">Регистрация</a>
+                        <button type="submit" class="btn-gold w-100" style="padding: 12px;">
+                            <i class="fas fa-sign-in-alt me-2"></i>Войти
+                        </button>
+
+                        <div class="text-center mt-3">
+                            <span class="text-muted" style="font-size: 0.85rem;">Нет аккаунта?</span>
+                            <a asp-page="./Register" style="color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem;">
+                                Зарегистрироваться
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -36,3 +49,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

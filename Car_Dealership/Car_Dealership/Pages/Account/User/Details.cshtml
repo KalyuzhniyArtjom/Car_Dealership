@@ -1,40 +1,49 @@
 ﻿@page
 @model Car_Dealership.Pages.Account.User.DetailsModel
 @{
+    ViewData["Title"] = "Детали пользователя";
 }
-<div class="container mt-4">
+<div class="container py-4">
     <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-sm border-0 rounded-4">
+        <div class="col-lg-6 col-md-8">
+            <div class="card-dark">
                 <div class="card-body p-4">
-                    <h2 class="h3 card-title mb-4 text-warning">Изменить пользователя</h2>
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div style="width: 4px; height: 32px; background: var(--accent); border-radius: 4px;"></div>
+                        <h2 class="h4 mb-0" style="font-weight: 700;">Информация о пользователе</h2>
+                    </div>
 
-                    <form method="post">
-                        <input type="hidden" asp-for="User.Id" />
-
-                        <div class="mb-3">
-                            <label asp-for="User.Email" class="form-label fw-semibold">Email адрес</label>
-                            <input asp-for="User.Email" class="form-control" />
+                    <div class="d-flex align-items-center gap-3 mb-4 p-3" style="background: var(--bg-primary); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <div class="user-avatar" style="width: 56px; height: 56px; font-size: 1.3rem; flex-shrink: 0;">@Model.User.Email?.Substring(0, 1).ToUpper()</div>
+                        <div>
+                            <div class="fw-bold" style="font-size: 1.1rem;">@Model.User.Email</div>
+                            <span class="badge" style="background: @(Model.User.Role == "Admin" ? "var(--accent)" : "var(--text-muted)"); color: @(Model.User.Role == "Admin" ? "#0a0a0a" : "#fff");">@Model.User.Role</span>
                         </div>
+                    </div>
 
-                        <div class="mb-3">
-                            <label asp-for="User.Password" class="form-label fw-semibold">Пароль</label>
-                            <input asp-for="User.Password" type="password" class="form-control" />
+                    <div class="mb-4">
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                            <span style="color: var(--text-secondary); font-size: 0.85rem;">ID</span>
+                            <span style="font-weight: 500; font-size: 0.85rem;">@Model.User.Id</span>
                         </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                            <span style="color: var(--text-secondary); font-size: 0.85rem;">Email</span>
+                            <span style="font-weight: 500; font-size: 0.85rem;">@Model.User.Email</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+                            <span style="color: var(--text-secondary); font-size: 0.85rem;">Роль</span>
+                            <span style="font-weight: 500; font-size: 0.85rem;">@Model.User.Role</span>
+                        </div>
+                    </div>
 
-                        <div class="mb-4">
-                            <label asp-for="User.Role" class="form-label fw-semibold">Роль доступа</label>
-                            <select asp-for="User.Role" class="form-select">
-                                <option value="User">User</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                        </div>
-
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-warning rounded-pill px-4 text-white">Сохранить</button>
-                            <a asp-page="Index" class="btn btn-outline-secondary rounded-pill px-4">Отмена</a>
-                        </div>
-                    </form>
+                    <div class="d-flex gap-2">
+                        <a asp-page="Edit" asp-route-id="@Model.User.Id" class="btn-gold">
+                            <i class="fas fa-edit me-2"></i>Редактировать
+                        </a>
+                        <a asp-page="Index" class="btn-ghost">
+                            <i class="fas fa-arrow-left me-2"></i>Назад
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
