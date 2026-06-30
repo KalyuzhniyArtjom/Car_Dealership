@@ -1,0 +1,29 @@
+﻿@page
+@model Car_Dealership.Pages.Account.AccessDeniedModel
+@{
+    ViewData["Title"] = "Доступ запрещен";
+}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card-dark text-center p-5">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(220, 53, 69, 0.1); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                    <i class="fas fa-shield-alt" style="color: #dc3545; font-size: 2.5rem;"></i>
+                </div>
+                <h1 class="display-1 fw-bold" style="color: var(--accent); letter-spacing: -0.05em;">403</h1>
+                <h2 class="h4 fw-bold mb-3" style="color: var(--text-primary);">Доступ ограничен</h2>
+                <p class="text-muted mb-4" style="max-width: 400px; margin: 0 auto;">
+                    У вашего аккаунта недостаточно прав для просмотра этой страницы.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <a asp-page="/Index" class="btn-gold">
+                        <i class="fas fa-home me-2"></i>На главную
+                    </a>
+                    <a asp-page="./Login" class="btn-ghost">
+                        <i class="fas fa-sign-in-alt me-2"></i>Войти
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

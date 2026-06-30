@@ -1,60 +1,45 @@
 ﻿@page
 @model Car_Dealership.Pages.Clients.DeleteModel
 @{
+    ViewData["Title"] = "Удалить клиента";
 }
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-lg border-0">
-                    <div class="card-header bg-danger text-white text-center py-4">
-                        <h1 class="h3 mb-0">🗑️ Удалить клиента</h1>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card-dark text-center p-4">
+                <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(220, 53, 69, 0.1); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                    <i class="fas fa-user" style="color: #dc3545; font-size: 2rem;"></i>
+                </div>
+                <h3 class="h5 fw-bold mb-2" style="color: var(--text-primary);">Удалить клиента?</h3>
+                <p class="text-muted small mb-4">Это действие нельзя отменить. Все данные клиента будут удалены.</p>
+
+                <div class="card-dark p-3 text-start mb-4" style="background: var(--bg-primary);">
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">ФИО</span>
+                        <span style="font-weight: 500; font-size: 0.85rem;">@Model.Client.FullName</span>
                     </div>
-
-                    <div class="card-body p-4">
-                        <div class="alert alert-warning text-center mb-4">
-                            <h3 class="h5 mb-0">⚠️ Вы уверены?</h3>
-                        </div>
-
-                        <div class="bg-light p-4 rounded mb-4">
-                            <div class="mb-3 pb-3 border-bottom">
-                                <p class="text-secondary mb-1"><strong>ФИО клиента:</strong></p>
-                                <p class="h5 text-dark mb-0">@Model.Client.FullName</p>
-                            </div>
-
-                            <div class="mb-3">
-                                <p class="text-secondary mb-1"><strong>Телефон:</strong></p>
-                                <p class="h5 text-dark mb-0">@Model.Client.PhoneNumber</p>
-                            </div>
-                        </div>
-
-                        <form method="post">
-                            <input type="hidden" asp-for="Client.Id" />
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-danger btn-lg py-2">
-                                    🗑️ Удалить
-                                </button>
-                            </div>
-                        </form>
-
-                        <div class="text-center mt-3">
-                            <a asp-page="Index" class="btn btn-link text-secondary">
-                                ◀️ Отмена
-                            </a>
-                        </div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Телефон</span>
+                        <span style="font-weight: 500; font-size: 0.85rem;">@(string.IsNullOrEmpty(Model.Client.PhoneNumber) ? "—" : Model.Client.PhoneNumber)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Дата рождения</span>
+                        <span style="font-weight: 500; font-size: 0.85rem;">@Model.Client.BirthDate.ToString("dd.MM.yyyy")</span>
                     </div>
                 </div>
+
+                <form method="post">
+                    <input type="hidden" asp-for="Client.Id" />
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="submit" class="btn" style="background: #dc3545; border: none; color: #fff; font-weight: 600; padding: 10px 32px; border-radius: var(--radius-sm); transition: var(--transition);">
+                            <i class="fas fa-trash me-2"></i>Да, удалить
+                        </button>
+                        <a asp-page="Index" class="btn-ghost">
+                            <i class="fas fa-times me-2"></i>Отмена
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>

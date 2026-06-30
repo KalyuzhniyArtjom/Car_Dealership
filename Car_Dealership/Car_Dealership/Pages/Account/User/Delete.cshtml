@@ -1,0 +1,44 @@
+﻿@page
+@model Car_Dealership.Pages.Account.User.DeleteModel
+@{
+    ViewData["Title"] = "Удалить пользователя";
+}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card-dark">
+                <div style="height: 4px; background: #dc3545;"></div>
+                <div class="card-body p-4 text-center">
+                    <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(220, 53, 69, 0.1); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <i class="fas fa-trash-alt" style="color: #dc3545; font-size: 1.5rem;"></i>
+                    </div>
+
+                    <h3 class="h5 mb-2" style="font-weight: 700;">Удалить пользователя?</h3>
+                    <p class="text-muted small mb-4">Это действие нельзя отменить. Все данные пользователя будут удалены.</p>
+
+                    <div class="card-dark p-3 text-start mb-4" style="background: var(--bg-primary);">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="user-avatar" style="width: 44px; height: 44px; font-size: 1.1rem; flex-shrink: 0;">@Model.User.Email?.Substring(0, 1).ToUpper()</div>
+                            <div class="text-truncate">
+                                <div class="fw-bold text-truncate" style="color: var(--text-primary);">@Model.User.Email</div>
+                                <div class="small text-muted">Роль: @Model.User.Role</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="post">
+                        <input type="hidden" asp-for="User.Id" />
+                        <div class="d-flex justify-content-center gap-2">
+                            <button type="submit" class="btn" style="background: #dc3545; border: none; color: #fff; font-weight: 600; padding: 10px 32px; border-radius: var(--radius-sm); transition: var(--transition);">
+                                <i class="fas fa-check me-2"></i>Да, удалить
+                            </button>
+                            <a asp-page="Index" class="btn-ghost">
+                                <i class="fas fa-times me-2"></i>Отмена
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
