@@ -6,7 +6,7 @@
         public string? Title { get; set; }
         public int? YearOfManufacture { get; set; }
         public string? Country { get; set; }
-        public int BrandCarId { get; set; }  
+        public int? BrandCarId { get; set; }  
         public BrandCar? BrandCar { get; set; }
     }
 }
