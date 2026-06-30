@@ -13,6 +13,17 @@ namespace Car_Dealership.Data
         }
             public DbSet<Car> Cars { get; set; }
             public DbSet<Client> Clients { get; set; }
-        
+            public DbSet<BrandCar> BrandCars { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<BrandCar>().HasData(
+                new BrandCar { Id = 1, Name = "BMW" },
+                new BrandCar { Id = 2, Name = "Mercedes" },
+                new BrandCar { Id = 3, Name = "Audi" }
+                );
+        }
+            
+
     }
 }

@@ -12,9 +12,11 @@ namespace Car_Dealership.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        async public Task<IActionResult> OnGet()
         {
-
+            //return RedirectToPage("/Car/Index");
+            return Page();
         }
     }
 }
+

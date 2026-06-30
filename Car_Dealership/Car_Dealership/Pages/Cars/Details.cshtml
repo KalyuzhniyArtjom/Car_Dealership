@@ -1,0 +1,16 @@
+﻿@page
+@model Car_Dealership.Pages.Cars.DetailsModel
+@{
+}
+<h1>Информация об автомобиле</h1>
+
+<div>
+    <p><strong>Название:</strong> @Model.Car.Title</p>
+    <p><strong>Страна:</strong> @Model.Car.Country</p>
+    <p><strong>Год выпуска:</strong> @Model.Car.YearOfManufacture</p>
+    <p><strong>Цена:</strong> @Model.Car.Price</p>
+</div>
+
+<p>
+    <a asp-page="Index">Назад к списку</a>
+</p>

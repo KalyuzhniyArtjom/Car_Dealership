@@ -1,0 +1,83 @@
+﻿@page
+@model Car_Dealership.Pages.Clients.IndexModel
+@{
+}
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+
+        <div class="card shadow-sm mt-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Список клиентов</h5>
+
+                <a asp-page="Create" class="btn btn-light btn-sm">
+                    + Добавить клиента
+                </a>
+            </div>
+
+            <div class="card-body p-0">
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>FullName</th>
+                                <th>VisitDate</th>
+                                <th>Телефон</th>
+                                <th>Дата рождения</th>
+                                <th class="text-end">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var client in Model.Client)
+                            {
+                                <tr>
+                                    <td class="fw-semibold">
+                                        @client.FullName
+                                    </td>
+
+                                    <td>
+                                        <span class="text-muted">
+                                            @client.VisitDate
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        @(string.IsNullOrEmpty(client.PhoneNumber)
+                                                                            ? "—"
+                                                                            : client.PhoneNumber)
+                                </td>
+
+                                    <td>
+                                        @client.BirthDate.ToString()
+                                    </td>
+
+                                    <td class="text-end">
+                                        <a asp-page="Details"
+                                           asp-route-id="@client.Id"
+                                           class="btn btn-sm btn-outline-primary me-1">
+                                            Открыть
+                                        </a>
+
+                                        <a asp-page="Edit"
+                                           asp-route-id="@client.Id"
+                                           class="btn btn-sm btn-outline-warning me-1">
+                                            Изменить
+                                        </a>
+
+                                        <a asp-page="Delete"
+                                           asp-route-id="@client.Id"
+                                           class="btn btn-sm btn-outline-danger">
+                                            Удалить
+                                        </a>
+                                    </td>
+                                </tr>
+                                                        }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

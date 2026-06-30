@@ -1,0 +1,53 @@
+﻿@page
+@model Car_Dealership.Pages.Clients.CreateModel
+@{
+}
+<h1 class="mb-4">Добавить клиента</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="Client.FullName" class="form-label"></label>
+                        <input asp-for="Client.FullName" class="form-control" />
+                        <span asp-validation-for="Client.FullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Client.VisitDate" class="form-label"></label>
+                        <input asp-for="Client.VisitDate" class="form-control" />
+                        <span asp-validation-for="Client.VisitDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Client.PhoneNumber" class="form-label"></label>
+                        <input asp-for="Client.PhoneNumber" class="form-control" />
+                        <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Client.BirthDate" class="form-label"></label>
+                        <input asp-for="Client.BirthDate" type="date" class="form-control" />
+                        <span asp-validation-for="Client.BirthDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            Сохранить
+                        </button>
+
+                        <a asp-page="Index" class="btn btn-secondary">
+                            Назад
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

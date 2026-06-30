@@ -1,0 +1,204 @@
+﻿@page
+@using Car_Dealership.Model
+@model Car_Dealership.Pages.Cars.IndexModel
+@{
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .car-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+            .car-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            }
+
+        .car-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .car-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .car-year {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .btn-action {
+            margin: 2px;
+            border-radius: 20px;
+        }
+
+        .add-button {
+            margin-bottom: 30px;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: bold;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+            .empty-state i {
+                font-size: 64px;
+                color: #dee2e6;
+                margin-bottom: 20px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Заголовок и кнопка добавления -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-5 fw-bold text-primary">
+                <i class="bi bi-car-front-fill"></i> Наш автопарк
+            </h1>
+            <a asp-page="Create" class="btn btn-success btn-lg add-button">
+                <i class="bi bi-plus-circle"></i> Добавить автомобиль
+            </a>
+        </div>
+
+        <!-- Статистика -->
+        @{
+            var carsList = Model.Cars as IEnumerable<Car> ?? new List<Car>();
+            var carCount = carsList.Count();
+            var averagePrice = carCount > 0 ? carsList.Average(c => c.Price) : 0;
+            var newCarsCount = carCount > 0 ? carsList.Count(c => c.YearOfManufacture >= DateTime.Now.Year - 3) : 0;
+        }
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-car-front"></i> Всего авто
+                        </h5>
+                        <h2 class="card-text">@carCount</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-warning text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-cash-stack"></i> Средняя цена
+                        </h5>
+                        <h2 class="card-text">
+                            @(averagePrice.ToString("N0")) ₽
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-calendar"></i> Новинки
+                        </h5>
+                        <h2 class="card-text">
+                            @newCarsCount авто
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карточки автомобилей -->
+        @if (carsList.Any())
+        {
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                @foreach (var car in carsList)
+                {
+                    <div class="col">
+                        <div class="card car-card h-100">
+                            <div class="car-header">
+                                <i class="bi bi-car-front" style="font-size: 48px;"></i>
+                                <h3 class="card-title mt-2 mb-0">@car.Title</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <i class="bi bi-geo-alt-fill text-primary"></i>
+                                            <strong>Страна:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            @car.Country
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <i class="bi bi-cash-stack text-success"></i>
+                                            <strong>Цена:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="car-price">@car.Price.ToString("N0") ₽</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <i class="bi bi-calendar-event text-warning"></i>
+                                            <strong>Год выпуска:</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="car-year">@car.YearOfManufacture</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-top-0 pb-3">
+                                <div class="d-flex justify-content-around">
+                                    <a asp-page="Details" asp-route-id="@car.Id" class="btn btn-info btn-action" title="Открыть">
+                                        <i class="bi bi-eye"></i> Открыть
+                                    </a>
+                                    <a asp-page="Edit" asp-route-id="@car.Id" class="btn btn-warning btn-action" title="Изменить">
+                                        <i class="bi bi-pencil"></i> Изменить
+                                    </a>
+                                    <a asp-page="Delete" asp-route-id="@car.Id" class="btn btn-danger btn-action" title="Удалить">
+                                        <i class="bi bi-trash"></i> Удалить
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <!-- Пустое состояние -->
+            <div class="empty-state">
+                <i class="bi bi-emoji-frown"></i>
+                <h3>Нет автомобилей</h3>
+                <p class="text-muted">В базе данных пока нет ни одного автомобиля.</p>
+                <a asp-page="Create" class="btn btn-primary btn-lg">
+                    <i class="bi bi-plus-circle"></i> Добавить первый автомобиль
+                </a>
+            </div>
+        }
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿@page
+@model Car_Dealership.Pages.Cars.DeleteModel
+@{
+}
+<h1>Удалить автомобиль</h1>
+
+<h3>Вы уверены?</h3>
+
+<div>
+    <p><strong>@Model.Car.Title</strong></p>
+    <p>@Model.Car.Country</p>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="Car.Id" />
+    <button type="submit">Удалить</button>
+</form>
+
+<a asp-page="Index">Отмена</a>

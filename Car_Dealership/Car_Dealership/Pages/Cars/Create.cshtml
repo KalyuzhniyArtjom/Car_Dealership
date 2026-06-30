@@ -1,0 +1,38 @@
+﻿@page
+@model Car_Dealership.Pages.Cars.CreateModel
+@{
+}
+<h1>Добавить автомобиль</h1>
+
+<form method="post">
+    <div>
+        <label>Название</label><br />
+        <input asp-for="Car.Title" />
+        <span asp-validation-for="Car.BrandCar"></span>
+    </div>
+
+    <div>
+        <label>Модель</label><br />
+        <select asp-for="Car.BrandCarId" asp-items="Model.BrandCars"> </select>
+    </div>
+
+    <div>
+        <label>Страна производитель</label><br />
+        <input asp-for="Car.Country" />
+    </div>
+
+    <div>
+        <label>Цена</label><br />
+        <input asp-for="Car.Price" type="number" />
+    </div>
+
+
+    <div>
+        <label>Год выпуска</label><br />
+        <input asp-for="Car.YearOfManufacture" type="number" />
+    </div>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<a asp-page="Index">Назад</a>
