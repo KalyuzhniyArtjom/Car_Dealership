@@ -1,168 +1,70 @@
 ﻿@page
 @model Car_Dealership.Pages.Clients.CreateModel
 @{
+    ViewData["Title"] = "Новый клиент";
 }
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-</head>
-<body>
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-7 col-lg-6">
-                <div class="card shadow-lg">
-                    <div class="card-header text-white text-center py-4">
-                        <i class="bi bi-person-plus-fill" style="font-size: 3rem; margin-bottom: 1rem; display: inline-block;"></i>
-                        <h1 class="h3 mb-0">Добавление нового клиента</h1>
-                        <p class="mb-0 mt-2 opacity-75 small">Заполните информацию о клиенте</p>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card-dark">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div style="width: 4px; height: 32px; background: var(--accent); border-radius: 4px;"></div>
+                        <h2 class="h4 mb-0" style="font-weight: 700;">
+                            <i class="fas fa-user-plus me-2" style="color: var(--accent);"></i>Новый клиент
+                        </h2>
                     </div>
 
-                    <div class="card-body p-4">
-                        <form method="post">
-                            <!-- ФИО -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">
-                                    <i class="bi bi-person-fill me-1"></i>
-                                    ФИО клиента
-                                </label>
-                                <input asp-for="Client.FullName"
-                                       class="form-control form-control-lg"
-                                       placeholder="Иванов Иван Иванович" />
-                                <span asp-validation-for="Client.FullName" class="text-danger small">
-                                    <i class="bi bi-exclamation-triangle-fill me-1"></i>
-                                </span>
-                            </div>
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
 
-                            <!-- Дата визита -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">
-                                    <i class="bi bi-calendar-check-fill me-1"></i>
-                                    Дата визита
-                                </label>
-                                <input asp-for="Client.VisitDate"
-                                       class="form-control form-control-lg"
-                                       type="date" />
-                                <span asp-validation-for="Client.VisitDate" class="text-danger small"></span>
-                            </div>
+                        <div class="mb-3">
+                            <label asp-for="Client.FullName" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-user me-2" style="color: var(--accent);"></i>ФИО клиента
+                            </label>
+                            <input asp-for="Client.FullName" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" placeholder="Иванов Иван Иванович" />
+                            <span asp-validation-for="Client.FullName" class="text-danger small"></span>
+                        </div>
 
-                            <!-- Телефон -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">
-                                    <i class="bi bi-telephone-fill me-1"></i>
-                                    Номер телефона
-                                </label>
-                                <input asp-for="Client.PhoneNumber"
-                                       class="form-control form-control-lg"
-                                       placeholder="+7 (999) 123-45-67" />
-                                <span asp-validation-for="Client.PhoneNumber" class="text-danger small"></span>
-                                <small class="text-muted d-block mt-1">
-                                    <i class="bi bi-info-circle-fill me-1"></i>
-                                    Формат: +7 (XXX) XXX-XX-XX
-                                </small>
-                            </div>
+                        <div class="mb-3">
+                            <label asp-for="Client.VisitDate" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-calendar-check me-2" style="color: var(--accent);"></i>Дата визита
+                            </label>
+                            <input asp-for="Client.VisitDate" type="date" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" />
+                            <span asp-validation-for="Client.VisitDate" class="text-danger small"></span>
+                        </div>
 
-                            <!-- Дата рождения -->
-                            <div class="mb-4">
-                                <label class="form-label fw-semibold">
-                                    <i class="bi bi-cake2-fill me-1"></i>
-                                    Дата рождения
-                                </label>
-                                <input asp-for="Client.BirthDate"
-                                       class="form-control form-control-lg"
-                                       type="date" />
-                                <span asp-validation-for="Client.BirthDate" class="text-danger small"></span>
-                            </div>
+                        <div class="mb-3">
+                            <label asp-for="Client.PhoneNumber" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-phone me-2" style="color: var(--accent);"></i>Номер телефона
+                            </label>
+                            <input asp-for="Client.PhoneNumber" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" placeholder="+7 (999) 123-45-67" />
+                            <span asp-validation-for="Client.PhoneNumber" class="text-danger small"></span>
+                        </div>
 
-                            <!-- Кнопки -->
-                            <div class="d-grid gap-3 mt-4">
-                                <button type="submit" class="btn btn-primary btn-lg py-2">
-                                    <i class="bi bi-save2 me-2"></i>
-                                    Сохранить клиента
-                                </button>
-                                <div class="text-center">
-                                    <a asp-page="Index" class="text-decoration-none text-secondary">
-                                        <i class="bi bi-arrow-left me-1"></i>
-                                        Вернуться к списку
-                                    </a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="mb-4">
+                            <label asp-for="Client.BirthDate" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fas fa-cake me-2" style="color: var(--accent);"></i>Дата рождения
+                            </label>
+                            <input asp-for="Client.BirthDate" type="date" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary); padding: 12px 16px;" />
+                            <span asp-validation-for="Client.BirthDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn-gold">
+                                <i class="fas fa-save me-2"></i>Сохранить
+                            </button>
+                            <a asp-page="Index" class="btn-ghost">
+                                <i class="fas fa-arrow-left me-2"></i>Назад
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            padding: 2rem 0;
-        }
-
-        .card {
-            border: none;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .form-label {
-            color: #4a5568;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-control {
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-            .form-control:focus {
-                border-color: #667eea;
-                box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-                outline: none;
-            }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-            .btn-primary:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-                background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            }
-
-            .btn-primary:active {
-                transform: translateY(0);
-            }
-
-        .text-secondary:hover {
-            color: #667eea !important;
-            transform: translateX(-3px);
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-    </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
-</body>
-</html>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

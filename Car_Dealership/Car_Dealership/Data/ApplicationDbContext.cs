@@ -1,4 +1,5 @@
 ﻿using Car_Dealership.Model;
+using Car_Dealership.Model.AuthApp;
 using Microsoft.EntityFrameworkCore;
 
 namespace Car_Dealership.Data
@@ -14,6 +15,8 @@ namespace Car_Dealership.Data
             public DbSet<Car> Cars { get; set; }
             public DbSet<Client> Clients { get; set; }
             public DbSet<BrandCar> BrandCars { get; set; }
+            public DbSet<AuthUser> AuthUsers { get; set; }
+            
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

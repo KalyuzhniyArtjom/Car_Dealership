@@ -1,0 +1,46 @@
+﻿@page
+@model Car_Dealership.Pages.Account.ProfileModel
+@{
+    ViewData["Title"] = "Профиль";
+}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="card-dark">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="user-avatar" style="width: 72px; height: 72px; font-size: 1.8rem; margin: 0 auto;">@User.Identity?.Name?.Substring(0, 1).ToUpper()</div>
+                        <h2 class="h4 fw-bold mt-3" style="color: var(--text-primary);">@User.Identity?.Name</h2>
+                        <span class="badge" style="background: @(User.IsInRole("Admin") ? "var(--accent)" : "var(--text-muted)"); color: @(User.IsInRole("Admin") ? "#0a0a0a" : "#fff"); padding: 4px 16px; font-weight: 500;">
+                            @(User.IsInRole("Admin") ? "Администратор" : "Пользователь")
+                        </span>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; margin-top: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                            <span style="color: var(--text-secondary); font-size: 0.85rem;">
+                                <i class="fas fa-envelope me-2" style="color: var(--accent);"></i>Email
+                            </span>
+                            <span style="font-weight: 500; font-size: 0.85rem;">@User.Identity?.Name</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+                            <span style="color: var(--text-secondary); font-size: 0.85rem;">
+                                <i class="fas fa-user-tag me-2" style="color: var(--accent);"></i>Роль
+                            </span>
+                            <span style="font-weight: 500; font-size: 0.85rem;">@(User.IsInRole("Admin") ? "Администратор" : "Пользователь")</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a asp-page="/Index" class="btn-gold" style="text-align: center;">
+                            <i class="fas fa-home me-2"></i>На главную
+                        </a>
+                        <a asp-page="./Logout" class="btn-ghost" style="text-align: center; color: #dc3545; border-color: #dc3545;">
+                            <i class="fas fa-sign-out-alt me-2"></i>Выйти
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿@page
+@model Car_Dealership.Pages.Account.User.EditModel
+@{
+    ViewData["Title"] = "Редактировать пользователя";
+}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card-dark">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div style="width: 4px; height: 32px; background: var(--accent); border-radius: 4px;"></div>
+                        <h2 class="h4 mb-0" style="font-weight: 700;">Редактировать пользователя</h2>
+                    </div>
+
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <input type="hidden" asp-for="User.Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="User.Email" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">Email адрес</label>
+                            <input asp-for="User.Email" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary);" placeholder="user@example.com" />
+                            <span asp-validation-for="User.Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="User.Password" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">Новый пароль</label>
+                            <input asp-for="User.Password" type="password" class="form-control" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary);" placeholder="Оставьте пустым, чтобы не менять" />
+                            <span class="text-muted small">Оставьте пустым, чтобы не изменять пароль</span>
+                            <span asp-validation-for="User.Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="User.Role" class="form-label" style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">Роль доступа</label>
+                            <select asp-for="User.Role" class="form-select" style="background: var(--bg-primary); border-color: var(--border-color); color: var(--text-primary);">
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            <span asp-validation-for="User.Role" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn-gold">
+                                <i class="fas fa-save me-2"></i>Сохранить
+                            </button>
+                            <a asp-page="Index" class="btn-ghost">
+                                <i class="fas fa-times me-2"></i>Отмена
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,95 +1,721 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru" data-theme="dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Car_Dealership</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] - Apex Motors</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Car_Dealership.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AutoRepairShop.styles.css" asp-append-version="true" />
+
+    <style>
+        /* ============================================
+               ROOT VARIABLES — Премиум стиль
+            ============================================ */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --bg-navbar: rgba(10, 10, 10, 0.92);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b6b6b;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --border-light: rgba(255, 255, 255, 0.1);
+            --accent: #d4a853;
+            --accent-light: #f0d080;
+            --accent-dark: #b8923a;
+            --accent-hover: #e8c86a;
+            --accent-rgb: 212, 168, 83;
+            --shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --shadow-gold: 0 8px 40px rgba(212, 168, 83, 0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8f6f0;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-navbar: rgba(255, 255, 255, 0.95);
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #8a8a8a;
+            --border-color: rgba(0, 0, 0, 0.06);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+            --shadow-gold: 0 8px 40px rgba(212, 168, 83, 0.1);
+        }
+
+        /* ============================================
+               GLOBAL
+            ============================================ */
+        * {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+        }
+
+        html, body {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        /* Золотое свечение фона */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(212, 168, 83, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        main {
+            flex: 1 0 auto;
+            padding: 2rem 0 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+               SCROLLBAR — Золотой
+            ============================================ */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+
+        /* ============================================
+               TYPOGRAPHY
+            ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .text-gold {
+            color: var(--accent);
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .border-gold {
+            border-color: var(--accent) !important;
+        }
+
+        .glow-gold {
+            box-shadow: 0 0 30px rgba(212, 168, 83, 0.1);
+        }
+
+        /* ============================================
+               NAVBAR — Премиум
+            ============================================ */
+        .navbar-custom {
+            background: var(--bg-navbar) !important;
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1050;
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: -0.03em;
+            color: var(--text-primary) !important;
+            position: relative;
+        }
+
+        .navbar-brand i {
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 1.4rem;
+            filter: drop-shadow(0 0 10px rgba(212, 168, 83, 0.2));
+        }
+
+        .navbar-brand::after {
+            content: '✦';
+            position: absolute;
+            right: -22px;
+            top: -2px;
+            font-size: 0.6rem;
+            color: var(--accent);
+            opacity: 0.6;
+        }
+
+        .nav-link-custom {
+            font-weight: 500;
+            color: var(--text-secondary) !important;
+            padding: 8px 18px !important;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            position: relative;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .nav-link-custom:hover {
+            color: var(--text-primary) !important;
+            background: rgba(212, 168, 83, 0.06);
+        }
+
+        .nav-link-custom.active {
+            color: var(--accent) !important;
+            background: rgba(212, 168, 83, 0.08);
+        }
+
+        .nav-link-custom.active::before {
+            content: '◆';
+            position: absolute;
+            left: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.5rem;
+            color: var(--accent);
+        }
+
+        .nav-link-custom i {
+            margin-right: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+               BUTTONS — Золотые
+            ============================================ */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: none;
+            color: #0a0a0a;
+            font-weight: 700;
+            padding: 10px 28px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+            color: #0a0a0a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 168, 83, 0.3);
+        }
+
+        .btn-gold:hover::before {
+            opacity: 1;
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            font-weight: 600;
+            padding: 10px 28px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-outline-gold:hover {
+            background: var(--accent);
+            color: #0a0a0a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 168, 83, 0.2);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 10px 28px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 4px 20px rgba(212, 168, 83, 0.05);
+        }
+
+        /* ============================================
+               USER AVATAR — Золотой
+            ============================================ */
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #0a0a0a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            border: 2px solid rgba(212, 168, 83, 0.3);
+            box-shadow: 0 0 20px rgba(212, 168, 83, 0.1);
+            transition: var(--transition);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 168, 83, 0.2);
+        }
+
+        .dropdown-menu-custom {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 8px;
+            min-width: 200px;
+        }
+
+        .dropdown-menu-custom .dropdown-item {
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-menu-custom .dropdown-item:hover {
+            background: rgba(212, 168, 83, 0.08);
+            color: var(--text-primary);
+        }
+
+        .dropdown-menu-custom .dropdown-item i {
+            width: 20px;
+            color: var(--accent);
+        }
+
+        .dropdown-menu-custom .dropdown-divider {
+            border-color: var(--border-color);
+        }
+
+        /* ============================================
+               THEME TOGGLE — Золотой
+            ============================================ */
+        .theme-toggle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--accent), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: rotate(45deg);
+        }
+
+        .theme-toggle:hover::before {
+            opacity: 1;
+        }
+
+        /* ============================================
+               CARDS — Премиум
+            ============================================ */
+        .card-dark {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-dark::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card-dark:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 168, 83, 0.2);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .card-dark:hover::before {
+            opacity: 1;
+        }
+
+        /* ============================================
+               FOOTER — Премиум
+            ============================================ */
+        .footer-custom {
+            flex-shrink: 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 32px 0 24px;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .footer-custom .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .footer-custom .footer-brand i {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .footer-custom a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .footer-custom a:hover {
+            color: var(--accent);
+        }
+
+        .footer-custom .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            transition: var(--transition);
+            margin: 0 3px;
+            position: relative;
+        }
+
+        .footer-custom .social-link::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 50%;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--accent), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .footer-custom .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .footer-custom .social-link:hover::before {
+            opacity: 1;
+        }
+
+        /* ============================================
+               RESPONSIVE
+            ============================================ */
+        @@media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            .navbar-brand::after {
+                display: none;
+            }
+            .footer-custom .row > div {
+                text-align: center !important;
+                margin-bottom: 12px;
+            }
+            .btn-gold, .btn-outline-gold, .btn-ghost {
+                padding: 8px 18px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- ============================================
+    NAVBAR
+    ============================================ -->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Car_Dealership</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-page="/Index">
+                    <i class="fas fa-crown"></i>Apex Motors
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link nav-link-custom" asp-page="/Index">
+                                <i class="fas fa-home"></i>Главная
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link nav-link-custom" asp-page="/Cars/Index">
+                                <i class="fas fa-car"></i>Автомобили
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Cars/Index">Автомобили</a>
+                            <a class="nav-link nav-link-custom" asp-page="/Clients/Index">
+                                <i class="fas fa-users"></i>Клиенты
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Clients/Index">Клиенты</a>
-                        </li>
+                        @if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-custom text-gold" asp-page="/Account/User/Index">
+                                    <i class="fas fa-shield-alt"></i>Админ
+                                </a>
+                            </li>
+                        }
                     </ul>
 
-                    <ul class="navbar-nav ms-auto">
-                        @*+++ темная тема*@
-                        <li class="nav-item">
-                            <button class="btn btn-outline-secondary" onclick="toggleTheme()">🌓 Переключить тему</button>
-                        </li>
-                        @*--- темная тема*@
-                    </ul>
+                    <ul class="navbar-nav align-items-center gap-2">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                    <span class="user-avatar">@User.Identity.Name?.Substring(0, 1).ToUpper()</span>
+                                    <span class="d-none d-md-inline" style="color: var(--text-secondary); font-size: 0.85rem;">@User.Identity.Name</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-custom dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Account/Profile">
+                                            <i class="fas fa-user"></i> Профиль
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Account/Logout">
+                                            <i class="fas fa-sign-out-alt"></i> Выйти
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn-ghost" asp-page="/Account/Login">
+                                    <i class="fas fa-sign-in-alt me-1"></i>Вход
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn-gold" asp-page="/Account/Register">
+                                    <i class="fas fa-user-plus me-1"></i>Регистрация
+                                </a>
+                            </li>
+                        }
 
+                        <li class="nav-item">
+                            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Переключить тему">
+                                <i id="themeIcon" class="fas fa-moon"></i>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- ============================================
+    MAIN
+    ============================================ -->
+    <main>
         <div class="container">
-            &copy; 2026 - Car_Dealership - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- ============================================
+    FOOTER
+    ============================================ -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <div class="footer-brand">
+                        <i class="fas fa-crown"></i>Apex Motors
+                    </div>
+                    <div class="text-muted" style="font-size: 0.8rem; margin-top: 4px;">
+                        ✦ Премиум автосервис ✦
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="d-flex justify-content-center gap-1">
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">
+                        &copy; @DateTime.Now.Year — Все права защищены
+                    </div>
+                    <a asp-page="/Privacy" style="font-size: 0.75rem; color: var(--text-muted); text-decoration: none;">
+                        <i class="fas fa-lock me-1"></i>Конфиденциальность
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
+    <script>
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            applyTheme(current === 'dark' ? 'light' : 'dark');
+        }
+
+        // Apply saved or system theme
+        const saved = localStorage.getItem('theme');
+        if (saved) {
+            applyTheme(saved);
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        // Listen for system changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-<script>
-    // Функция для применения темы
-    function applyTheme(theme) {
-        document.documentElement.setAttribute("data-bs-theme", theme);
-        localStorage.setItem("theme", theme);
-    }
-    // Функция отслежиживания темы windows
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
-            html.setAttribute("data-bs-theme", e.matches ? "dark" : "light");
-        });
-
-    // Функция для переключения темы
-    function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute("data-bs-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        applyTheme(newTheme);
-    }
-
-    // При загрузке страницы применяем сохраненную тему
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-        applyTheme(savedTheme);
-    } else {
-        // Если тема не сохранена, проверяем системные настройки
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        applyTheme(prefersDark ? "dark" : "light");
-    }
-</script>
