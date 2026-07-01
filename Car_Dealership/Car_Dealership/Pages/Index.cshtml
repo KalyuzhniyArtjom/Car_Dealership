@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Apex Motors — Премиум автосалон";
 }
 <!DOCTYPE html>
 <html lang="ru">
@@ -9,274 +9,448 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <style>
-        /* Светлая тема (по умолчанию) */
-        body {
-            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-        }
-
-            /* Темная тема */
-            body.dark-mode {
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            }
-
-                body.dark-mode .navbar-custom {
-                    background: rgba(30, 30, 46, 0.95);
-                    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-                }
-
-                    body.dark-mode .navbar-custom .navbar-brand,
-                    body.dark-mode .nav-link-custom {
-                        color: #e0e0e0;
-                    }
-
-                body.dark-mode .hero-card {
-                    background: rgba(30, 30, 46, 0.92);
-                }
-
-                    body.dark-mode .hero-card h1,
-                    body.dark-mode .hero-card .lead {
-                        color: #e0e0e0 !important;
-                    }
-
-                body.dark-mode .footer {
-                    background: rgba(30, 30, 46, 0.9);
-                }
-
-                    body.dark-mode .footer small,
-                    body.dark-mode .footer a {
-                        color: #a0a0a0 !important;
-                    }
-
-                body.dark-mode .btn-outline-gradient {
-                    background: #2d2d44;
-                    color: #e0e0e0;
-                    border-color: #667eea;
-                }
-
-                body.dark-mode .stats-card {
-                    background: #2d2d44;
-                    color: #e0e0e0;
-                }
-
-        .navbar-custom {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            border-radius: 0 0 20px 20px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link-custom {
-            color: #4a5568;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-
-            .nav-link-custom:hover {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                transform: translateY(-2px);
-            }
-
-        .hero-card {
-            background: rgba(255, 255, 255, 0.92);
-            border-radius: 30px;
-            transition: transform 0.3s ease;
-        }
-
-            .hero-card:hover {
-                transform: translateY(-5px);
-            }
-
-        .welcome-icon {
-            font-size: 4rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .btn-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            transition: all 0.2s;
-        }
-
-            .btn-gradient:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 10px 20px rgba(102,126,234,0.3);
-                color: white;
-            }
-
-        .btn-outline-gradient {
-            border: 2px solid #667eea;
-            color: #667eea;
-            border-radius: 50px;
-            padding: 12px 30px;
-            transition: all 0.2s;
-            background: white;
-        }
-
-            .btn-outline-gradient:hover {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                border-color: transparent;
-            }
-
-        .footer {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px 20px 0 0;
-            margin-top: auto;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle {
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-            .theme-toggle:hover {
-                transform: rotate(15deg);
-            }
-
-        body.dark-mode .theme-toggle {
-            color: #ffd700;
-        }
-
-        .stats-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-            .stats-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            }
-
-        .stats-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        body.dark-mode .stats-number {
-            color: #8ec5fc;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Навигация сверху -->
-    <nav class="navbar navbar-custom px-4 py-2 mb-5">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-dark" href="/">
-                <i class="bi bi-car-front-fill me-2 text-primary"></i>
-                AutoDeal
-            </a>
-            <div class="ms-auto d-flex align-items-center gap-3">
-                <a asp-page="/Cars/Index" class="btn nav-link-custom me-2 text-decoration-none">
-                    <i class="bi bi-car-front me-1"></i>
-                    Автомобили
-                </a>
-                <a asp-page="/Clients/Index" class="btn nav-link-custom text-decoration-none">
-                    <i class="bi bi-people me-1"></i>
-                    Клиенты
-                </a>
-                <!-- Кнопка переключения темы -->
-                <i class="bi bi-moon-stars-fill theme-toggle" id="themeToggle"></i>
+    <!-- ============================================
+    ВЕСЬ ЭКРАН
+    ============================================ -->
+    <div style="height: 100vh; display: flex; flex-direction: column; background: var(--bg-primary);">
+
+        <!-- ============================================
+        ВЕРХНЯЯ ПАНЕЛЬ
+        ============================================ -->
+        <div style="padding: 20px 0 16px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; background: var(--bg-navbar); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center flex-wrap" style="gap: 12px;">
+                    <a asp-page="/Index" style="text-decoration: none; display: flex; align-items: center; gap: 14px;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(212, 168, 83, 0.2);">
+                            <i class="fas fa-crown" style="font-size: 1.3rem; color: #0a0a0a;"></i>
+                        </div>
+                        <div>
+                            <span style="font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.03em;">
+                                <span class="text-gold-gradient">Apex</span> Motors
+                            </span>
+                            <div style="font-size: 0.55rem; color: var(--text-muted); letter-spacing: 2.5px; text-transform: uppercase; margin-top: -2px;">
+                                Premium Auto
+                            </div>
+                        </div>
+                    </a>
+
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <a asp-page="/Cars/Index" class="nav-link-custom">
+                            <i class="fas fa-car" style="color: var(--accent);"></i> Автомобили
+                        </a>
+                        <a asp-page="/Clients/Index" class="nav-link-custom">
+                            <i class="fas fa-users" style="color: var(--accent);"></i> Клиенты
+                        </a>
+                        <div style="width: 1px; height: 28px; background: var(--border-color);"></div>
+                        <button class="theme-toggle" onclick="toggleTheme()">
+                            <i id="themeIcon" class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
 
-    <!-- Основной контент -->
-    <div class="container my-auto py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="hero-card p-5 text-center shadow-lg">
-                    <i class="bi bi-car-front-fill welcome-icon mb-4 d-block"></i>
+        <!-- ============================================
+        ОСНОВНАЯ КАРТОЧКА
+        ============================================ -->
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 0;">
+            <div class="container" style="height: 100%; display: flex; align-items: center;">
+                <div class="row justify-content-center" style="width: 100%;">
+                    <div class="col-lg-10">
+                        <div class="card-dark" style="padding: 2.5rem 3.5rem; position: relative; overflow: hidden; width: 100%; min-height: 320px; display: flex; flex-direction: column; justify-content: center;">
 
-                    <h1 class="display-4 fw-bold text-dark mb-3">
-                        Добро пожаловать в проект автосалон
-                    </h1>
+                            <div style="position: absolute; top: -40%; right: -15%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212, 168, 83, 0.05) 0%, transparent 70%); pointer-events: none; border-radius: 50%;"></div>
+                            <div style="position: absolute; bottom: -40%; left: -10%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(212, 168, 83, 0.04) 0%, transparent 70%); pointer-events: none; border-radius: 50%;"></div>
 
-                    <p class="lead text-secondary mb-4">
-                        <i class="bi bi-geo-alt-fill me-1"></i>
-                        Ваш надежный автомобильный партнер
-                    </p>
+                            <div style="position: relative; z-index: 1;">
+                                <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(212, 168, 83, 0.08); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem; border: 1px solid rgba(212, 168, 83, 0.15);">
+                                    <i class="fas fa-crown" style="font-size: 1.8rem; color: var(--accent);"></i>
+                                </div>
 
-                    <div class="mt-4">
-                        <a href="https://learn.microsoft.com/aspnet/core" target="_blank" class="btn btn-gradient me-2">
-                            <i class="bi bi-book me-2"></i>
-                            Документация
-                        </a>
-                        <a asp-page="/Cars/Index" class="btn btn-outline-gradient">
-                            <i class="bi bi-car-front me-2"></i>
-                            Перейти к автомобилям
-                        </a>
+                                <h1 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--text-primary); margin-bottom: 0.2rem; letter-spacing: -0.02em;">
+                                    <span class="text-gold-gradient">Apex Motors</span>
+                                </h1>
+                                <p style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem; font-weight: 300; letter-spacing: 0.03em;">
+                                    <i class="fas fa-gem" style="color: var(--accent); font-size: 0.7rem; margin-right: 8px;"></i>
+                                    Премиум автомобили для взыскательных клиентов
+                                </p>
+
+                                <div style="width: 40px; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); margin-bottom: 1rem;"></div>
+
+                                <p style="color: var(--text-muted); max-width: 480px; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem;">
+                                    Изысканный выбор автомобилей премиум-класса. Профессиональный подход и безупречный сервис.
+                                </p>
+
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                    <a asp-page="/Cars/Index" class="btn-gold">
+                                        <i class="fas fa-car me-2"></i>Автомобили
+                                    </a>
+                                    <a asp-page="/Clients/Index" class="btn-outline-gold">
+                                        <i class="fas fa-users me-2"></i>Клиенты
+                                    </a>
+                                </div>
+
+                                <div style="display: flex; gap: 35px; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--border-color);">
+                                    <div>
+                                        <div style="font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted);">Автомобилей</div>
+                                        <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent);">120+</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted);">Клиентов</div>
+                                        <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent);">450+</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted);">Отзывов</div>
+                                        <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent);">
+                                            4.9 <i class="fas fa-star" style="font-size: 0.9rem; color: var(--accent);"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <div class="mt-5 pt-3">
-                        <small class="text-muted">
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <span class="ms-2">Лучший выбор для вас</span>
-                        </small>
+        <!-- ============================================
+        ПОЛОСА ВНИЗУ
+        ============================================ -->
+        <div style="flex-shrink: 0; background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 30px; flex-wrap: wrap; gap: 8px; max-width: 100%;">
+                
+                <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">
+                        &copy; @DateTime.Now.Year — Все права защищены
+                    </span>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                    <a asp-page="/Privacy" style="font-size: 0.7rem; color: var(--text-muted); text-decoration: none; transition: var(--transition);">
+                        <i class="fas fa-lock" style="font-size: 0.6rem; margin-right: 4px;"></i>
+                        Конфиденциальность
+                    </a>
+                    <a href="#" style="font-size: 0.7rem; color: var(--text-muted); text-decoration: none; transition: var(--transition);">
+                        <i class="fas fa-book" style="font-size: 0.6rem; margin-right: 4px;"></i>
+                        Документация
+                    </a>
+                    <div style="width: 1px; height: 16px; background: var(--border-color);"></div>
+                    
+                    <div style="display: flex; gap: 4px;">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-vk"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Футер -->
-    <footer class="footer text-center py-3 mt-5">
-        <div class="container">
-            <small class="text-muted">
-                © 2026 - Car_Dealership -
-                <a href="#" class="text-decoration-none text-secondary">Privacy</a>
-            </small>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Переключение темной темы
-        const themeToggle = document.getElementById('themeToggle');
-
-        // Проверяем сохраненную тему в localStorage
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            document.body.classList.add('dark-mode');
-            themeToggle.classList.remove('bi-moon-stars-fill');
-            themeToggle.classList.add('bi-sun-fill');
+    <!-- ============================================
+    СТИЛИ
+    ============================================ -->
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-navbar: rgba(10, 10, 10, 0.92);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b6b6b;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --accent: #d4a853;
+            --accent-dark: #b8923a;
+            --accent-hover: #e8c86a;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        themeToggle.addEventListener('click', () => { 
-            document.body.classList.toggle('dark-mode');
+        [data-theme="light"] {
+            --bg-primary: #f5f2ec;
+            --bg-secondary: #ffffff;
+            --bg-navbar: rgba(255, 255, 255, 0.92);
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #8a8a8a;
+            --border-color: rgba(0, 0, 0, 0.06);
+            --accent: #c49b3f;
+            --accent-dark: #a8822f;
+            --accent-hover: #dbb35a;
+        }
 
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-                themeToggle.classList.remove('bi-moon-stars-fill');
-                themeToggle.classList.add('bi-sun-fill');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-                themeToggle.classList.remove('bi-sun-fill');
-                themeToggle.classList.add('bi-moon-stars-fill'); 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(135deg, var(--accent), #e8c86a, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-dark {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+            transition: var(--transition);
+        }
+
+        .card-dark:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 168, 83, 0.15);
+            box-shadow: 0 12px 48px rgba(212, 168, 83, 0.06);
+        }
+
+        [data-theme="light"] .card-dark {
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="light"] .card-dark:hover {
+            box-shadow: 0 12px 48px rgba(196, 155, 63, 0.08);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: none;
+            color: #0a0a0a;
+            font-weight: 700;
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+            color: #0a0a0a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 168, 83, 0.25);
+            text-decoration: none;
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            font-weight: 700;
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .btn-outline-gold:hover {
+            background: var(--accent);
+            color: #0a0a0a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 168, 83, 0.15);
+            text-decoration: none;
+        }
+
+        .nav-link-custom {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-link-custom:hover {
+            color: var(--text-primary);
+            background: rgba(212, 168, 83, 0.06);
+            text-decoration: none;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: rotate(45deg);
+        }
+
+        .social-link {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.65rem;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        [data-theme="light"] .social-link {
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        [data-theme="light"] .nav-link-custom:hover {
+            background: rgba(196, 155, 63, 0.06);
+        }
+
+        @@media (max-width: 768px) {
+            html, body {
+                overflow: auto;
+            }
+            [style*="height: 100vh"] {
+                height: auto !important;
+                min-height: 100vh;
+            }
+            .card-dark {
+                padding: 1.5rem !important;
+                min-height: auto !important;
+            }
+            h1 {
+                font-size: 2rem !important;
+            }
+            [style*="padding: 12px 30px"] {
+                padding: 12px 16px !important;
+                flex-direction: column;
+                text-align: center;
+            }
+            [style*="gap: 16px"] {
+                gap: 8px !important;
+                justify-content: center;
+            }
+            [style*="gap: 14px"] {
+                gap: 8px !important;
+                justify-content: center;
+            }
+            [style*="gap: 35px"] {
+                gap: 20px !important;
+            }
+            .btn-gold, .btn-outline-gold {
+                padding: 8px 16px;
+                font-size: 0.6rem;
+            }
+        }
+
+        @@media (max-width: 480px) {
+            .nav-link-custom {
+                padding: 6px 12px;
+                font-size: 0.65rem;
+            }
+            .theme-toggle {
+                width: 34px;
+                height: 34px;
+                font-size: 0.8rem;
+            }
+            .card-dark {
+                padding: 1.2rem !important;
+            }
+            h1 {
+                font-size: 1.6rem !important;
+            }
+            .social-link {
+                width: 24px;
+                height: 24px;
+                font-size: 0.55rem;
+            }
+        }
+    </style>
+
+    <!-- ============================================
+    СКРИПТЫ
+    ============================================ -->
+    <script>
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            applyTheme(current === 'dark' ? 'light' : 'dark');
+        }
+
+        const saved = localStorage.getItem('theme');
+        if (saved) {
+            applyTheme(saved);
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
             }
         });
     </script>
